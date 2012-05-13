@@ -102,6 +102,7 @@
         NSNumber * flaseInNSNumber =[ NSNumber numberWithBool:FALSE];
         if([temp.marked isEqualToNumber: trueInNSNumber])
             temp.display = flaseInNSNumber;
+        [self.tableView reloadData];
     }
 }
 - (IBAction)toggleManageMode:(id)sender {
