@@ -21,6 +21,86 @@
 @synthesize fontSize= _fontSize;
 @synthesize whetherShowFilter = _whetherShowFilter;
 @synthesize whetherHideItemImediately = _whetherHideItemImediately;
+
+-(NSArray *) getSortDescriptor;
+{
+    /*Keys defined in data model:
+     @property (nonatomic, retain) NSString * note;
+     @property (nonatomic, retain) NSNumber * priority;
+     @property (nonatomic, retain) NSString * quantity;
+     @property (nonatomic, retain) NSString * tag;
+     @property (nonatomic, retain) NSString * tittle;
+     @property (nonatomic, retain) NSString * unit;
+     @property (nonatomic, retain) NSNumber * marked;
+     @property (nonatomic, retain) NSNumber * display;
+     @property (nonatomic, retain) NSSet *canFindIn;
+     @property (nonatomic, retain) ShoppingList *listedIn;
+     */
+    NSMutableArray* descriptor = [[NSMutableArray alloc]init];
+    NSString * tempSetting= nil;
+    for(tempSetting in self.sortingOrder)
+    {
+        NSSortDescriptor * tempDescriptor = nil;   
+
+        if([tempSetting isEqualToString: @"sorting order checked"])
+        {
+            tempDescriptor = [[NSSortDescriptor alloc]
+              initWithKey:@"marked"
+                              ascending:YES];
+        }else if ([tempSetting isEqualToString:@"sorting order alphabetical"]) {
+            tempDescriptor = [[NSSortDescriptor alloc]
+                              initWithKey:@"tittle"
+                              ascending:YES
+                              selector:@selector(localizedCaseInsensitiveCompare:)] ;
+        }else if ([tempSetting isEqualToString:@"sorting order newest"]) {
+           /*to be implement*/
+        }else if ([tempSetting isEqualToString:@"sorting order tag" ]) {
+            tempDescriptor = [[NSSortDescriptor alloc]
+                              initWithKey:@"tag"
+                              ascending:YES
+                              selector:@selector(localizedCaseInsensitiveCompare:)] ;
+        }else if ([tempSetting isEqualToString:@"sorting order prioriety"]) {
+            tempDescriptor = [[NSSortDescriptor alloc]
+                              initWithKey:@"priority"
+                              ascending:YES];
+        }else if ( [tempSetting isEqualToString:@"sorting order price" ]) {
+           /*to be impelmented*/
+        }else {
+            NSLog(@"ShoppinglistSettingManager: error generating sorting descriptor");
+        }
+        
+        if (tempDescriptor) {
+            [descriptor addObject:tempDescriptor];
+        }
+    }
+    
+    
+
+    return [NSArray arrayWithArray:descriptor];
+}
+-(NSArray *) getFontSize;
+{
+    UIFont * textFont = nil;
+    UIFont * detailedTextFont = nil;
+    NSString * tempSetting= self.fontSize;
+    
+    if([tempSetting isEqualToString: @"font size big"])
+    {
+        textFont = [UIFont boldSystemFontOfSize: 24];
+        detailedTextFont = [UIFont systemFontOfSize: 14];
+    }else if ([tempSetting isEqualToString:@"font size standard"]) {
+        textFont = [UIFont boldSystemFontOfSize: 20];
+        detailedTextFont = [UIFont systemFontOfSize: 12];
+    }else if ([tempSetting isEqualToString:@"font size small"]) {
+        textFont = [UIFont boldSystemFontOfSize: 16];
+        detailedTextFont = [UIFont systemFontOfSize: 10];
+    }else {
+        NSLog(@"ShoppinglistSettingManager: error generating sorting descriptor");
+    }
+       
+    return [NSArray arrayWithObjects:textFont,detailedTextFont, nil];
+}
+
 -(NSString*)showSortingOrder
 {
     NSArray * temp = nil;
@@ -37,10 +117,13 @@
 {
     [self.myDefaults setObject:@"font size standard" forKey:FONT_SIZE];
     
-    NSMutableArray * tempArray = [[NSMutableArray alloc] init ];
-    [tempArray addObject: @"sorting order checked"];
-    [tempArray addObject: @"sorting order alphabetical"];
-    [tempArray addObject: @"sorting order newest"];
+    NSMutableArray * tempArray = [NSMutableArray arrayWithObjects: @"sorting order checked",
+                                  @"sorting order alphabetical",
+                                  @"sorting order newest",
+                                  @"sorting order tag",
+                                  @"sorting order prioriety",
+                                  @"sorting order price", nil
+                                  ];
     [self.myDefaults setObject:[NSArray arrayWithArray:tempArray] forKey:SORTING_ORDER];
     
     [self.myDefaults synchronize];
@@ -90,6 +173,7 @@
 {
     [self.myDefaults setObject:sortingOrder forKey:SORTING_ORDER];
     [self.myDefaults synchronize];
+    NSLog(@"userDefault syncronized for sorting order");
     _sortingOrder = sortingOrder;
 }
 -(NSArray *) sortingOrder

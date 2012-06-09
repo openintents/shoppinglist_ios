@@ -15,8 +15,6 @@
 @end
 
 
-
-
 @implementation ShoppingListTableViewController
 @synthesize shoppingListDocument=_shoppingListDocument;
 @synthesize myScrollView = _myScrollView;

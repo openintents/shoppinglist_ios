@@ -8,7 +8,7 @@
 
 #import "SelectSortingRuleTableViewController.h"
 
-@interface SelectSortingRuleTableViewController ()
+@interface SelectSortingRuleTableViewController ()<MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>
 @property (strong,nonatomic) NSMutableArray* mySortingOrder;
 
 @end
@@ -34,7 +34,25 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return self.mySortingOrder.count;
+}
+-(NSString*) rephraseSortingRule: (NSString*)rule
+{
+    NSString* rephrasedRule;
+    if ([rule isEqualToString:  @"sorting order checked"]) {
+        rephrasedRule = @"Checked First";
+    }else if([rule isEqualToString:  @"sorting order alphabetical"]) {
+        rephrasedRule = @"Alphabetical Order";
+    }else if([rule isEqualToString: @"sorting order newest"]) {
+        rephrasedRule = @"Newest first";
+    }else if([rule isEqualToString:  @"sorting order tag"]) {
+        rephrasedRule = @"Tagged first";
+    }else if([rule isEqualToString:  @"sorting order prioriety"]) {
+        rephrasedRule = @"Prioriety first";
+    }else if([rule isEqualToString:  @"sorting order price"]) {
+        rephrasedRule = @"Lower price first";
+    }
+    return rephrasedRule;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -44,43 +62,11 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    switch (indexPath.row) {
-           
-        case 0:
-            cell.textLabel.text=@"Checked First";
+    
+            cell.textLabel.text=[self rephraseSortingRule: [self.mySortingOrder objectAtIndex:indexPath.row]];
             cell.showsReorderControl = YES;
             [cell setEditing:YES animated:YES];
-            break;
-        case 1:
-            cell.textLabel.text=@"Alphabetical Order";
-            cell.showsReorderControl = YES;
-            [cell setEditing:YES animated:YES];
-            break;
-        case 2:
-            cell.textLabel.text=@"Newest First";
-            cell.showsReorderControl = YES;
-            [cell setEditing:YES animated:YES];
-            break;
-        case 3:
-            cell.textLabel.text=@"Tagged First";
-            cell.showsReorderControl = YES;
-            [cell setEditing:YES animated:YES];
-            break;
-        case 4:
-            cell.textLabel.text=@"Higher Prioriety First";
-            cell.showsReorderControl = YES;
-            [cell setEditing:YES animated:YES];
-            break;
-        case 5:
-            cell.textLabel.text=@"Lower Price First";
-            cell.showsReorderControl = YES;
-            [cell setEditing:YES animated:YES];
-            break;
-        default:
-            NSLog(@"error when selecting prioriety at index path: %@", indexPath.description);
-            break;
-    }
-    return cell;
+            return cell;
 }
 
 #pragma mark - Table view delegate
@@ -103,16 +89,10 @@
     NSLog(@"%@", self.mySortingOrder.description);
 }
 
--(void) viewDidLoad
+-(void) viewDidLoad 
 {
     [super viewDidLoad];
-    self.mySortingOrder = [NSMutableArray arrayWithObjects: @"sorting order checked",
-                                                            @"sorting order alphabetical",
-                                                            @"sorting order newest",
-                                                            @"sorting order tag",
-                                                            @"sorting order prioriety",
-                                                            @"sorting order price", nil
-                           ];
+    self.mySortingOrder = [ NSMutableArray arrayWithArray:[self.deligate getSettingManager].sortingOrder];
 }
 -(void) viewWillAppear:(BOOL)animated
 {

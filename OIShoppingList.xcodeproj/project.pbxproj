@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1111CAC9156D1F16009F5CB7 /* checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 1111CAC7156D1F16009F5CB7 /* checkMark.png */; };
+		1111CACA156D1F16009F5CB7 /* noCheckMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 1111CAC8156D1F16009F5CB7 /* noCheckMark.png */; };
 		112E5EF8155FE3DD002AEF38 /* ListEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 112E5EF7155FE3DD002AEF38 /* ListEntry.m */; };
 		11330E121566FDDE006691BF /* OptionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11330E111566FDDE006691BF /* OptionsTableViewController.m */; };
 		113C98261567925800AFD094 /* SelectFontSizeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113C98251567925800AFD094 /* SelectFontSizeTableViewController.m */; };
 		113C982A1567927100AFD094 /* SelectSortingRuleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113C98291567927100AFD094 /* SelectSortingRuleTableViewController.m */; };
+		113D6E6A1577CE3E00F816F1 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113D6E691577CE3E00F816F1 /* MessageUI.framework */; };
 		114B9C1D155AF408003F785C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 114B9C1C155AF408003F785C /* UIKit.framework */; };
 		114B9C1F155AF408003F785C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 114B9C1E155AF408003F785C /* Foundation.framework */; };
 		114B9C21155AF408003F785C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 114B9C20155AF408003F785C /* CoreGraphics.framework */; };
@@ -50,6 +53,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1111CAC7156D1F16009F5CB7 /* checkMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkMark.png; sourceTree = "<group>"; };
+		1111CAC8156D1F16009F5CB7 /* noCheckMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noCheckMark.png; sourceTree = "<group>"; };
 		112E5EF6155FE3DD002AEF38 /* ListEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListEntry.h; sourceTree = "<group>"; };
 		112E5EF7155FE3DD002AEF38 /* ListEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListEntry.m; sourceTree = "<group>"; };
 		11330E101566FDDE006691BF /* OptionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsTableViewController.h; sourceTree = "<group>"; };
@@ -58,6 +63,7 @@
 		113C98251567925800AFD094 /* SelectFontSizeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectFontSizeTableViewController.m; sourceTree = "<group>"; };
 		113C98281567927100AFD094 /* SelectSortingRuleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectSortingRuleTableViewController.h; sourceTree = "<group>"; };
 		113C98291567927100AFD094 /* SelectSortingRuleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectSortingRuleTableViewController.m; sourceTree = "<group>"; };
+		113D6E691577CE3E00F816F1 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		114B9C18155AF408003F785C /* OIShoppingList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OIShoppingList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		114B9C1C155AF408003F785C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		114B9C1E155AF408003F785C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -107,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				113D6E6A1577CE3E00F816F1 /* MessageUI.framework in Frameworks */,
 				11CD1963155D489B0003012B /* CoreData.framework in Frameworks */,
 				114B9C1D155AF408003F785C /* UIKit.framework in Frameworks */,
 				114B9C1F155AF408003F785C /* Foundation.framework in Frameworks */,
@@ -145,6 +152,7 @@
 		114B9C0D155AF408003F785C = {
 			isa = PBXGroup;
 			children = (
+				113D6E691577CE3E00F816F1 /* MessageUI.framework */,
 				114B9C22155AF408003F785C /* OIShoppingList */,
 				114B9C43155AF409003F785C /* OIShoppingListTests */,
 				114B9C1B155AF408003F785C /* Frameworks */,
@@ -195,6 +203,8 @@
 		114B9C23155AF408003F785C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1111CAC7156D1F16009F5CB7 /* checkMark.png */,
+				1111CAC8156D1F16009F5CB7 /* noCheckMark.png */,
 				114B9C31155AF408003F785C /* MainStoryboard_iPad.storyboard */,
 				114B9C2B155AF408003F785C /* ShoppingListAppDelegate.h */,
 				114B9C2C155AF408003F785C /* ShoppingListAppDelegate.m */,
@@ -320,6 +330,8 @@
 				114B9C27155AF408003F785C /* InfoPlist.strings in Resources */,
 				114B9C30155AF408003F785C /* MainStoryboard_iPhone.storyboard in Resources */,
 				114B9C33155AF408003F785C /* MainStoryboard_iPad.storyboard in Resources */,
+				1111CAC9156D1F16009F5CB7 /* checkMark.png in Resources */,
+				1111CACA156D1F16009F5CB7 /* noCheckMark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

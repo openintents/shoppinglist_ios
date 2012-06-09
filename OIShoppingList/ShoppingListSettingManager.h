@@ -18,4 +18,6 @@
 -(void) setAppToFactorySetting;
 -(NSString *) inspectSetting;
 -(NSString *) showSortingOrder;
+-(NSArray *) getSortDescriptor;
+-(NSArray *) getFontSize;
 @end

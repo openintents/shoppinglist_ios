@@ -8,6 +8,8 @@
 
 #import "ListContentTableViewController.h"
 #import "EditEntryViewController.h"
+#import "ShoppingListSettingManager.h"
+#import "EditEntryViewController.h"
 @interface ListContentTableViewController()
 @property (weak, nonatomic) IBOutlet UITextField *addNewItemTextField;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cleanUp;
@@ -15,9 +17,11 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *editList;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *spacer;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *options;
+@property (strong,nonatomic) ShoppingListSettingManager * mySettingManager;
 
 @property  int manageModeActive;
 @property (strong,nonatomic) ListEntry *listEntry;
+@property (strong,nonatomic) UIActionSheet* shareOption;
 
 @end
 
@@ -32,14 +36,118 @@
 @synthesize listToDisplay = _listToDisplay;
 @synthesize listEntry =_listEntry;
 @synthesize manageModeActive = _manageModeActive;
+@synthesize mySettingManager = _mySettingManager;
+@synthesize shareOption = _shareOption;
+
+-(ShoppingListSettingManager*) mySettingManager
+{
+    if (!_mySettingManager) {
+        _mySettingManager = [[ShoppingListSettingManager alloc]init];
+    }
+    return _mySettingManager;
+}
+#pragma mark - SMS sharing
+-(NSString*)getSharedListInText
+{
+    NSString* text = @"";
+    NSArray * list =[self.fetchedResultsController fetchedObjects];
+    ListEntry *listEntry = nil; 
+
+    for (listEntry in list) {
+        if(listEntry.quantity)
+            text = [[text stringByAppendingString:listEntry.quantity.description] stringByAppendingString:@" "];
+        if(listEntry.unit)
+            text= [[text stringByAppendingString:listEntry.unit] stringByAppendingString:@" "];
+        if(listEntry.tittle)
+            text =[text stringByAppendingString:listEntry.tittle];
+        text = [text stringByAppendingString:@"\n"];
+    }
+    return text;
+
+}
+
+-(void)displaySMSComposerSheet
+{
+    if ([MFMessageComposeViewController canSendText]) {
+        MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
+        picker.messageComposeDelegate = self;
+        
+        NSString *smsBody = [self getSharedListInText];
+        [picker setBody:smsBody];
+        [self presentModalViewController:picker animated:YES];
+        
+    }
+}
+- (void)messageComposeController:(MFMessageComposeViewController *)controller
+             didFinishWithResult:(MessageComposeResult)result
+                           error:(NSError *)error
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+#pragma mark - Mail sharing
+
+-(void)displayMailComposerSheet
+{
+    if ([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+        picker.mailComposeDelegate = self;
+        
+        [picker setSubject:@"Hello from California!"];
+            
+        
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"ipodnano"
+                                                         ofType:@"png"];
+        NSData *myData = [NSData dataWithContentsOfFile:path];
+        [picker addAttachmentData:myData mimeType:@"image/png"
+                         fileName:@"ipodnano"];
+        
+        NSString *emailBody = [self getSharedListInText];
+        [picker setMessageBody:emailBody isHTML:NO];
+        
+        [self presentModalViewController:picker animated:YES];
+        
+    }        
+}
+
+// The mail compose view controller delegate method
+- (void)mailComposeController:(MFMailComposeViewController *)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError *)error
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+# pragma mark - action sheet
+-(UIActionSheet*) shareOption
+{
+    if (!_shareOption) {
+        _shareOption = [[UIActionSheet alloc] initWithTitle:@"share" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"SMS",@"Email", nil];
+    }
+    return _shareOption;
+}
+- (IBAction)shareClicked:(id)sender {
+    [self.shareOption showFromToolbar:self.navigationController.toolbar];
+}
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==0) {
+        [self displaySMSComposerSheet];
+    }else if (buttonIndex==1) {
+        [self displayMailComposerSheet];
+    }else {
+       // [self.shareOption dismissWithClickedButtonIndex:3 animated:YES];
+    }
+}
+
+
 #pragma mark - Table View Data Source
 //link up the table datasource with database by setting the fetchResultController implemented in CoreDataTableViewController
 - (void)setupFetchedResultsController // attaches an NSFetchRequest to this UITableViewController
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ListEntry"];
-    request.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"tittle"
+    request.sortDescriptors = self.mySettingManager.getSortDescriptor;
+    /*[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"tittle"
                                                                                      ascending:YES
-                                                                                      selector:@selector(localizedCaseInsensitiveCompare:)]];
+                                                                                      selector:@selector(localizedCaseInsensitiveCompare:)]];*/
     request.predicate = [NSPredicate predicateWithFormat:
                          (self.manageModeActive? @"listedIn.tittle = %@": @"(listedIn.tittle = %@) AND (display == TRUE)")
                          , self.listToDisplay.tittle];
@@ -60,6 +168,7 @@
 //Format the cell for table display
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSArray* font=self.mySettingManager.getFontSize;
     static NSString *CellIdentifier = @"List Entry Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -76,15 +185,21 @@
     cell.detailTextLabel.text = listEntry.tag;
     if ([listEntry.marked isEqualToNumber:[NSNumber numberWithBool:YES]])
     {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
         cell.textLabel.textColor = [UIColor lightGrayColor];
-        cell.editingAccessoryType = UITableViewCellAccessoryCheckmark;
+        cell.editingAccessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+        cell.textLabel.font = [font objectAtIndex:0];
+        cell.detailTextLabel.font = [font objectAtIndex:1];
+        cell.imageView.image = [UIImage imageNamed:@"checkMark.png"];
     }
     else 
     {
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
         cell.textLabel.textColor = [UIColor darkTextColor];
-        cell.editingAccessoryType = UITableViewCellAccessoryNone;
+        cell.editingAccessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+        cell.textLabel.font = [font objectAtIndex:0];
+        cell.detailTextLabel.font = [font objectAtIndex:1];
+        cell.imageView.image = [UIImage imageNamed:@"noCheckMark.png"];
 
     }
     return cell;
@@ -154,15 +269,17 @@
     }
 }
 #pragma mark - UITableViewDeligate
-
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
+    EditEntryViewController * entryDetail =[self.storyboard instantiateViewControllerWithIdentifier:@"entryDetail"];
+    entryDetail.entry = [self.fetchedResultsController objectAtIndexPath:indexPath]; 
+    [self.navigationController pushViewController:entryDetail animated:YES];
+}
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.suspendAutomaticTrackingOfChangesInManagedObjectContext = YES;
     self.listEntry = [self.fetchedResultsController objectAtIndexPath:indexPath]; 
     self.listEntry.marked = [NSNumber numberWithBool:[self.listEntry.marked isEqualToNumber:[NSNumber numberWithBool:NO]]];
     [tableView reloadData];
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:YES animated:NO];
-    self.suspendAutomaticTrackingOfChangesInManagedObjectContext = NO;
 
 }
 -(UITableViewCellEditingStyle) tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -220,11 +337,15 @@
     [super viewDidLoad];
 }
 */
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    [self displayUIToolBar];
 
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self displayUIToolBar];
+    [self setupFetchedResultsController];
+    [self.tableView reloadData];
+    
 }
 
 - (void)viewDidUnload

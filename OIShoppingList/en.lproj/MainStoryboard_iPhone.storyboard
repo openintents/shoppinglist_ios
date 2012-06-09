@@ -277,19 +277,19 @@
                     </tableView>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="902" y="-325"/>
+            <point key="canvasLocation" x="723" y="-328"/>
         </scene>
         <!--Edit Entry View Controller-->
         <scene sceneID="MX4-NW-Pxh">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NPj-g4-aPS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="Nz9-1w-hHX" customClass="EditEntryViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="entryDetail" id="Nz9-1w-hHX" customClass="EditEntryViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Efh-cP-CQG">
-                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="VbH-M8-P3W">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="8rk-ba-Weg">
@@ -353,7 +353,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1283" y="-144"/>
+            <point key="canvasLocation" x="1087" y="-161"/>
         </scene>
         <!--List Content Table View Controller-->
         <scene sceneID="CBA-nu-VTR">
@@ -406,9 +406,9 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem title="Details" id="ovm-ai-NGL">
+                        <barButtonItem title="Share" id="ovm-ai-NGL">
                             <connections>
-                                <segue destination="Nz9-1w-hHX" kind="push" id="0ge-JK-EmR"/>
+                                <action selector="shareClicked:" destination="IEY-LM-wfT" id="VhN-a0-LTo"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem title="Edit List" id="m9p-Cj-eso">
@@ -645,7 +645,7 @@
                     <navigationItem key="navigationItem" title="Font Size" id="I5h-Dt-09j"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1645" y="122"/>
+            <point key="canvasLocation" x="1683" y="146"/>
         </scene>
         <!--Select Sorting Rule Table View Controller - Sort By-->
         <scene sceneID="odE-Mn-ktW">
@@ -675,69 +675,9 @@
                     <navigationItem key="navigationItem" title="Sort By" id="4jC-Mx-awz"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1573" y="910"/>
+            <point key="canvasLocation" x="1675" y="700"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="CoreDataTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoreDataTableViewController.h"/>
-        </class>
-        <class className="EditEntryViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EditEntryViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="myPickerView" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="note" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="price" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="product" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="quantity" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tag" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="unit" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="ListContentTableViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListContentTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addNewItemTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="cleanUp" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="details" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="editList" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="options" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="spacer" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="MyTestViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyTestViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="buttonLeftBottom" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonLeftTop" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonRightBottom" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonRightTop" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="myLable" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="myTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="OptionsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionsTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="autoHideChecked" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="fontSizeCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="sortByCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="SelectFontSizeTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SelectFontSizeTableViewController.h"/>
-        </class>
-        <class className="SelectSortingRuleTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SelectSortingRuleTableViewController.h"/>
-        </class>
-        <class className="ShoppingListTableViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShoppingListTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="myTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

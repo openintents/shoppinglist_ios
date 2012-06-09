@@ -7,9 +7,9 @@
 //
 
 #import "OptionsTableViewController.h"
-#import "ShoppingListSettingManager.h"
 
 @interface OptionsTableViewController ()
+
 
 @property(strong,nonatomic) ShoppingListSettingManager* mySettingManager;
 @property (strong, nonatomic) IBOutlet UISwitch *autoHideChecked;
@@ -37,6 +37,11 @@
 }
 
 # pragma mark - deligate methods for fontsize & sorting selectiong
+-(ShoppingListSettingManager*)getSettingManager
+{
+    return self.mySettingManager;
+}
+
 -(void) applyFontSize:(NSString*)fontSize
 {
     NSLog(@"font size set to %@", fontSize);
@@ -78,10 +83,12 @@
 }
 -(void) shareViaSMS
 {
+    [self displaySMSComposerSheet];
     NSLog(@"SMS");
 }
 -(void) shareViaEmail
 {
+    [self displayMailComposerSheet];
     NSLog(@"email");
 }
 
@@ -148,6 +155,60 @@
             break;
     }
 }
+#pragma mark - SMS sharing
+
+-(void)displaySMSComposerSheet
+{
+    if ([MFMessageComposeViewController canSendText]) {
+        MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
+        picker.messageComposeDelegate = self;
+        
+        NSString *smsBody = @"It is raining in sunny California!";
+        [picker setBody:smsBody];
+        [self presentModalViewController:picker animated:YES];
+
+    }
+}
+- (void)messageComposeController:(MFMessageComposeViewController *)controller
+          didFinishWithResult:(MessageComposeResult)result
+                        error:(NSError *)error
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+#pragma mark - Mail sharing
+
+-(void)displayMailComposerSheet
+{
+    if ([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+        picker.mailComposeDelegate = self;
+        
+        [picker setSubject:@"Hello from California!"];
+        
+               
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"ipodnano"
+                                                         ofType:@"png"];
+        NSData *myData = [NSData dataWithContentsOfFile:path];
+        [picker addAttachmentData:myData mimeType:@"image/png"
+                         fileName:@"ipodnano"];
+        
+        NSString *emailBody = @"It is raining in sunny California!";
+        [picker setMessageBody:emailBody isHTML:NO];
+        
+        [self presentModalViewController:picker animated:YES];
+
+    }        
+}
+
+// The mail compose view controller delegate method
+- (void)mailComposeController:(MFMailComposeViewController *)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError *)error
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+#pragma mark - LifeCycle
+
 
 - (void)viewDidUnload {
     [self setAutoHideChecked:nil];
