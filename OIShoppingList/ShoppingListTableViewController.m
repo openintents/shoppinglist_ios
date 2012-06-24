@@ -7,7 +7,7 @@
 //
 
 #import "ShoppingListTableViewController.h"
-#import "ShoppingList+Creat.h"
+#import "Lists+Manage.h"
 
 @interface ShoppingListTableViewController()
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;
@@ -23,8 +23,8 @@
 #pragma mark - set up CoreData and open documents for use
 - (void)setupFetchedResultsController // attaches an NSFetchRequest to this UITableViewController
 {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ShoppingList"];
-    request.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"tittle" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Lists"];
+    request.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
     // no predicate because we want ALL the Photographers
     
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
@@ -73,7 +73,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-    ShoppingList *shoppingList = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    Lists *shoppingList = [self.fetchedResultsController objectAtIndexPath:indexPath];
     // be somewhat generic here (slightly advanced usage)
     // we'll segue to ANY view controller that has a photographer @property
     if ([segue.destinationViewController respondsToSelector:@selector(setListToDisplay:)]) {
@@ -87,7 +87,7 @@
 
 - (IBAction)creatNewList:(id)sender {
     NSString * listTittle =[[NSDate date] description];
-    [ShoppingList createShoppingListWithTittle: listTittle inManagedObjectContext:[self.shoppingListDocument managedObjectContext]];
+    [Lists createShoppingListWithName:listTittle inManagedObjectContext:[self.shoppingListDocument managedObjectContext]];
 }
 
 // Called when the UIKeyboardDidShowNotification is sent.
@@ -179,9 +179,9 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-    ShoppingList *shoppingList = [self.fetchedResultsController objectAtIndexPath:indexPath]; 
-    cell.textLabel.text = shoppingList.tittle;
-    cell.detailTextLabel.text = [shoppingList.date description ] ;
+    Lists *shoppingList = [self.fetchedResultsController objectAtIndexPath:indexPath]; 
+    cell.textLabel.text = shoppingList.name;
+    cell.detailTextLabel.text = [shoppingList.created description ] ;
     
     return cell;
 }
@@ -319,7 +319,7 @@
     //NSLog(@"%@",(self.myTextField.text==nil? @"yes":@"no" ));
     if(![self.myTextField.text isEqualToString:@""])
     {
-        [ShoppingList createShoppingListWithTittle:self.myTextField.text inManagedObjectContext:[self.shoppingListDocument managedObjectContext]];
+        [Lists createShoppingListWithName:self.myTextField.text inManagedObjectContext:[self.shoppingListDocument managedObjectContext]];
     }
     self.myTextField.text = @"";
 }

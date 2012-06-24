@@ -7,6 +7,9 @@
 //
 
 #import "EditEntryViewController.h"
+#import "Contains+Manage.h"
+#import "Items+Manage.h"
+#import "Units+Manage.h"
 @interface EditEntryViewController()
 @property (strong, nonatomic) IBOutlet UITextField *product;
 @property (strong, nonatomic) IBOutlet UITextField *quantity;
@@ -101,22 +104,19 @@
 
 -(void) saveEditingIntoCoreData
 {
-    self.entry.tittle = self.product.text;
-    self.entry.quantity = self.quantity.text;
-    self.entry.unit = self.unit.text;
-    self.entry.tag = self.tag.text;
-    self.entry.note = self.note.text;
+    [self.entry undateQuantity:self.quantity.text prioriety:@"1" itemName:self.product.text unit:self.unit.text tags:self.tag.text];
 }
 
 
 
 -(void)loadTextFromCoreDataToTextFields
-{
-    self.product.text =self.entry.tittle;
-    self.quantity.text = self.entry.quantity;
-    self.unit.text= self.entry.unit;
-    self.tag.text= self.entry.tag;
-    self.note.text= self.entry.note;
+{    self.product.text =self.entry.item_id.name;
+    self.quantity.text = [self.entry.quantity description];
+    self.unit.text= self.entry.item_id.unit.name;
+    self.tag.text= self.entry.item_id.tags;
+    self.note.text= @"";
+    self.entry.accessed =[NSDate date];
+  
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [self saveEditingIntoCoreData];

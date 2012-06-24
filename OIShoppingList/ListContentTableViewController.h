@@ -8,11 +8,12 @@
 
 #import <MessageUI/MessageUI.h>
 #import "CoreDataTableViewController.h"
-#import "ShoppingList+Creat.h"
-#import "ListEntry.h"
+#import "Lists+Manage.h"
+#import "Items+Manage.h"
+#import "Contains+Manage.h"
 
 @interface ListContentTableViewController : CoreDataTableViewController <UITableViewDelegate, UIActionSheetDelegate>
 
-@property (nonatomic, strong) ShoppingList* listToDisplay;
+@property (nonatomic, strong) Lists* listToDisplay;
 
 @end

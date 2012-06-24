@@ -10,6 +10,7 @@
 #import "EditEntryViewController.h"
 #import "ShoppingListSettingManager.h"
 #import "EditEntryViewController.h"
+#import "Units.h"
 @interface ListContentTableViewController()
 @property (weak, nonatomic) IBOutlet UITextField *addNewItemTextField;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cleanUp;
@@ -20,7 +21,7 @@
 @property (strong,nonatomic) ShoppingListSettingManager * mySettingManager;
 
 @property  int manageModeActive;
-@property (strong,nonatomic) ListEntry *listEntry;
+@property (strong,nonatomic) Contains *listEntry;
 @property (strong,nonatomic) UIActionSheet* shareOption;
 
 @end
@@ -48,10 +49,10 @@
 }
 #pragma mark - SMS sharing
 -(NSString*)getSharedListInText
-{
+{/*
     NSString* text = @"";
     NSArray * list =[self.fetchedResultsController fetchedObjects];
-    ListEntry *listEntry = nil; 
+    Items *listEntry = nil; 
 
     for (listEntry in list) {
         if(listEntry.quantity)
@@ -62,7 +63,8 @@
             text =[text stringByAppendingString:listEntry.tittle];
         text = [text stringByAppendingString:@"\n"];
     }
-    return text;
+    return text;*/
+    return @"";
 
 }
 
@@ -92,7 +94,7 @@
         MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
         picker.mailComposeDelegate = self;
         
-        [picker setSubject:@"Hello from California!"];
+        [picker setSubject: self.navigationController.title];
             
         
         NSString *path = [[NSBundle mainBundle] pathForResource:@"ipodnano"
@@ -143,14 +145,14 @@
 //link up the table datasource with database by setting the fetchResultController implemented in CoreDataTableViewController
 - (void)setupFetchedResultsController // attaches an NSFetchRequest to this UITableViewController
 {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ListEntry"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Contains"];
     request.sortDescriptors = self.mySettingManager.getSortDescriptor;
-    /*[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"tittle"
+    /*=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"quantity"
                                                                                      ascending:YES
-                                                                                      selector:@selector(localizedCaseInsensitiveCompare:)]];*/
+                                                                                      selector:@selector(compare:)]];*/
     request.predicate = [NSPredicate predicateWithFormat:
-                         (self.manageModeActive? @"listedIn.tittle = %@": @"(listedIn.tittle = %@) AND (display == TRUE)")
-                         , self.listToDisplay.tittle];
+                         (self.manageModeActive? @"list_id.name = %@": @"(list_id.name = %@) AND (status != 2)")
+                         , self.listToDisplay.name];
     
     
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
@@ -159,10 +161,10 @@
                                                                                    cacheName:nil];
 }
 //Invok the setup when the setListToDisplay Property is set
--(void) setListToDisplay: (ShoppingList*) shoppingList 
+-(void) setListToDisplay: (Lists*) shoppingList 
 {
     _listToDisplay = shoppingList;
-    self.title = shoppingList.tittle;
+    self.title = shoppingList.name;
     [self setupFetchedResultsController];
 }
 //Format the cell for table display
@@ -174,16 +176,16 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    ListEntry *listEntry = [self.fetchedResultsController objectAtIndexPath:indexPath]; 
+    Contains *listEntry = [self.fetchedResultsController objectAtIndexPath:indexPath]; 
     cell.textLabel.text = @"";
     if(listEntry.quantity)
         cell.textLabel.text = [[cell.textLabel.text stringByAppendingString:listEntry.quantity.description] stringByAppendingString:@" "];
-    if(listEntry.unit)
-        cell.textLabel.text= [[cell.textLabel.text stringByAppendingString:listEntry.unit] stringByAppendingString:@" "];
-    if(listEntry.tittle)
-        cell.textLabel.text =[cell.textLabel.text stringByAppendingString:listEntry.tittle];
-    cell.detailTextLabel.text = listEntry.tag;
-    if ([listEntry.marked isEqualToNumber:[NSNumber numberWithBool:YES]])
+    if(listEntry.item_id.unit.name)
+        cell.textLabel.text= [[cell.textLabel.text stringByAppendingString:listEntry.item_id.unit.name] stringByAppendingString:@" "];
+    if(listEntry.item_id.name)
+        cell.textLabel.text =[cell.textLabel.text stringByAppendingString:listEntry.item_id.name];
+    cell.detailTextLabel.text = listEntry.item_id.tags;
+    if ([listEntry isChecked] == YES)
     {
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
         cell.textLabel.textColor = [UIColor lightGrayColor];
@@ -211,12 +213,10 @@
 
 - (IBAction)cleanUp:(UITabBarItem *)sender 
 {
-    for(ListEntry * temp in self.listToDisplay.needToBuy)
+    for(Contains* temp in self.listToDisplay.contains_id)
     {
-        NSNumber * trueInNSNumber =[ NSNumber numberWithBool:TRUE];
-        NSNumber * flaseInNSNumber =[ NSNumber numberWithBool:FALSE];
-        if([temp.marked isEqualToNumber: trueInNSNumber])
-            temp.display = flaseInNSNumber;
+        if([temp isChecked]== TRUE)
+            [temp cleanItem];
         [self.tableView reloadData];
     }
 }
@@ -243,8 +243,8 @@
     [sender resignFirstResponder];
     if(![self.addNewItemTextField.text isEqualToString:@""])
     {
-        ListEntry * newEntry = [ListEntry creatListEntryWithTittle:sender.text inManagedObjectContext:self.listToDisplay.managedObjectContext];
-        [self.listToDisplay addEntry:newEntry];    }
+        [self.listToDisplay addItemWithName:sender.text inManagedObjectContext:self.listToDisplay.managedObjectContext];
+    }
     sender.text = @"";
 }
 
@@ -277,16 +277,14 @@
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.listEntry = [self.fetchedResultsController objectAtIndexPath:indexPath]; 
-    self.listEntry.marked = [NSNumber numberWithBool:[self.listEntry.marked isEqualToNumber:[NSNumber numberWithBool:NO]]];
-    [tableView reloadData];
+    [self.listEntry toggleChecked];
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:YES animated:NO];
 
 }
 -(UITableViewCellEditingStyle) tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ListEntry * temp = [self.fetchedResultsController objectAtIndexPath:indexPath]; 
-    NSLog(@"%@",temp.tittle);
-    if([temp.display isEqualToNumber:[NSNumber numberWithInt:0]])
+    Contains * temp = [self.fetchedResultsController objectAtIndexPath:indexPath]; 
+    if(![temp needDisplay])
         return UITableViewCellEditingStyleInsert;
     else 
         return UITableViewCellEditingStyleNone;
@@ -297,20 +295,19 @@
 {
     if(editingStyle == UITableViewCellEditingStyleInsert)
     {
-        ListEntry * temp = [self.fetchedResultsController objectAtIndexPath:indexPath]; 
-        temp.display=[NSNumber numberWithBool:TRUE];
-        temp.marked = [NSNumber numberWithBool:FALSE];
+        Contains * temp = [self.fetchedResultsController objectAtIndexPath:indexPath]; 
+        [temp rescueItem];
         [tableView reloadData];
-    }
+    }/*
     else if(editingStyle == UITableViewCellEditingStyleDelete)
     {
-        ListEntry * temp = [self.fetchedResultsController objectAtIndexPath:indexPath]; 
-        ShoppingList * tempList = temp.listedIn;
+        Contains * temp = [self.fetchedResultsController objectAtIndexPath:indexPath]; 
+        Lists * tempList = temp.list_id;
         NSMutableArray * tempMutable = [temp.listedIn mutableCopy];
         [tempMutable removeObject: temp];
         tempList.needToBuy = [NSArray arrayWithArray:tempMutable];
         [tableView reloadData];
-    }
+    }*/
 }
 #pragma mark - generated code
 - (void)didReceiveMemoryWarning

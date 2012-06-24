@@ -10,7 +10,7 @@
 #import "ListContentTableViewController.h"
 
 @interface EditEntryViewController : UIViewController<UIPickerViewDelegate>
-@property (nonatomic, strong) ListEntry * entry;
+@property (nonatomic, strong) Contains * entry;
 
 
 @end

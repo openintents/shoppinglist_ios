@@ -1,42 +1,75 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="878" systemVersion="11E53" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="ItemsInStock" representedClassName="ItemsInStock" syncable="YES">
-        <attribute name="price" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="tittle" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="unit" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="canFindIn" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Shop" inverseName="itemsInStock" inverseEntity="Shop" syncable="YES"/>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Contains" representedClassName="Contains" syncable="YES">
+        <attribute name="accessed" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="modified" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="prioriety" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="quantity" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="share_created_by" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="share_modified_by" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="sort_key" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 64" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="item_id" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Items" inverseName="contains_id" inverseEntity="Items" syncable="YES"/>
+        <relationship name="list_id" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Lists" inverseName="contains_id" inverseEntity="Lists" syncable="YES"/>
     </entity>
-    <entity name="ListEntry" representedClassName="ListEntry" syncable="YES">
-        <attribute name="display" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="marked" optional="YES" attributeType="Boolean" syncable="YES"/>
+    <entity name="Items" representedClassName="Items" syncable="YES">
+        <attribute name="accessed" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="barcode" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="modified" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="priority" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="quantity" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="tittle" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="unit" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="canFindIn" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Shop" inverseName="hasEntry" inverseEntity="Shop" syncable="YES"/>
-        <relationship name="listedIn" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ShoppingList" inverseName="needToBuy" inverseEntity="ShoppingList" syncable="YES"/>
+        <attribute name="price_fake" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="tags" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unit_fake" optional="YES" attributeType="Binary" syncable="YES"/>
+        <relationship name="contains_id" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contains" inverseName="item_id" inverseEntity="Contains" syncable="YES"/>
+        <relationship name="itemstores_id" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Itemsstores" inverseName="item_id" inverseEntity="Itemsstores" syncable="YES"/>
+        <relationship name="unit" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Units" inverseName="item_id" inverseEntity="Units" syncable="YES"/>
     </entity>
-    <entity name="Shop" representedClassName="Shop" syncable="YES">
-        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="location" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="shopId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="tittle" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="hasEntry" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ListEntry" inverseName="canFindIn" inverseEntity="ListEntry" syncable="YES"/>
-        <relationship name="itemsInStock" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ItemsInStock" inverseName="canFindIn" inverseEntity="ItemsInStock" syncable="YES"/>
+    <entity name="Itemsstores" representedClassName="Itemsstores" syncable="YES">
+        <attribute name="aisle" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="modified" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="stocks_item" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="item_id" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Items" inverseName="itemstores_id" inverseEntity="Items" syncable="YES"/>
+        <relationship name="store_id" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Stores" inverseName="itemstores_id" inverseEntity="Stores" syncable="YES"/>
     </entity>
-    <entity name="ShoppingList" representedClassName="ShoppingList" syncable="YES">
-        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="listId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="tittle" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="needToBuy" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ListEntry" inverseName="listedIn" inverseEntity="ListEntry" syncable="YES"/>
+    <entity name="Lists" representedClassName="Lists" syncable="YES">
+        <attribute name="accessed" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="modified" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="share_contact" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="share_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="store_filter" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="tags_filter" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="contains_id" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contains" inverseName="list_id" inverseEntity="Contains" syncable="YES"/>
+        <relationship name="store_id" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Stores" inverseName="list_id" inverseEntity="Stores" syncable="YES"/>
+    </entity>
+    <entity name="Stores" representedClassName="Stores" syncable="YES">
+        <attribute name="created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="modified" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="itemstores_id" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Itemsstores" inverseName="store_id" inverseEntity="Itemsstores" syncable="YES"/>
+        <relationship name="list_id" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Lists" inverseName="store_id" inverseEntity="Lists" syncable="YES"/>
+    </entity>
+    <entity name="Units" representedClassName="Units" syncable="YES">
+        <attribute name="created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="modified" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="singular" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="item_id" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Items" inverseName="unit" inverseEntity="Items" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ItemsInStock" positionX="117" positionY="72" width="128" height="120"/>
-        <element name="ListEntry" positionX="-81" positionY="6" width="128" height="195"/>
-        <element name="Shop" positionX="106" positionY="-135" width="128" height="135"/>
-        <element name="ShoppingList" positionX="-281" positionY="102" width="128" height="105"/>
+        <element name="Items" positionX="-81" positionY="6" width="128" height="240"/>
+        <element name="Stores" positionX="-74" positionY="-174" width="128" height="120"/>
+        <element name="Lists" positionX="-459" positionY="-117" width="128" height="210"/>
+        <element name="Itemsstores" positionX="180" positionY="-27" width="128" height="150"/>
+        <element name="Contains" positionX="-279" positionY="105" width="128" height="210"/>
+        <element name="Units" positionX="142" positionY="234" width="128" height="120"/>
     </elements>
 </model>

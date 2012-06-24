@@ -44,29 +44,29 @@
 
         if([tempSetting isEqualToString: @"sorting order checked"])
         {
-            tempDescriptor = [[NSSortDescriptor alloc]
+            /*tempDescriptor = [[NSSortDescriptor alloc]
               initWithKey:@"marked"
-                              ascending:YES];
+                              ascending:YES];*/
         }else if ([tempSetting isEqualToString:@"sorting order alphabetical"]) {
             tempDescriptor = [[NSSortDescriptor alloc]
-                              initWithKey:@"tittle"
+                              initWithKey:@"item_id.name"
                               ascending:YES
                               selector:@selector(localizedCaseInsensitiveCompare:)] ;
         }else if ([tempSetting isEqualToString:@"sorting order newest"]) {
            /*to be implement*/
         }else if ([tempSetting isEqualToString:@"sorting order tag" ]) {
             tempDescriptor = [[NSSortDescriptor alloc]
-                              initWithKey:@"tag"
+                              initWithKey:@"item_id.tags"
                               ascending:YES
                               selector:@selector(localizedCaseInsensitiveCompare:)] ;
         }else if ([tempSetting isEqualToString:@"sorting order prioriety"]) {
-            tempDescriptor = [[NSSortDescriptor alloc]
+           /* tempDescriptor = [[NSSortDescriptor alloc]
                               initWithKey:@"priority"
-                              ascending:YES];
+                              ascending:YES];*/
         }else if ( [tempSetting isEqualToString:@"sorting order price" ]) {
            /*to be impelmented*/
         }else {
-            NSLog(@"ShoppinglistSettingManager: error generating sorting descriptor");
+            NSLog(@"ShoppinglistSettingManager: error generating sorting descriptor::%@",tempSetting);
         }
         
         if (tempDescriptor) {
@@ -102,7 +102,7 @@
 }
 
 -(NSString*)showSortingOrder
-{
+{ 
     NSArray * temp = nil;
     NSString * result = @"";
     NSArray* order = self.sortingOrder;
