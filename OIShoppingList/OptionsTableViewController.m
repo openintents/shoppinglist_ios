@@ -8,13 +8,14 @@
 
 #import "OptionsTableViewController.h"
 
-@interface OptionsTableViewController ()
+@interface OptionsTableViewController ()<MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate,UIActionSheetDelegate>
 
 
 @property(strong,nonatomic) ShoppingListSettingManager* mySettingManager;
 @property (strong, nonatomic) IBOutlet UISwitch *autoHideChecked;
 @property (strong, nonatomic) IBOutlet UITableViewCell *fontSizeCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *sortByCell;
+@property (strong,nonatomic)UIActionSheet* factorySettingConfirm;
 
 @end
 
@@ -26,6 +27,7 @@
 @synthesize autoHideChecked = _autoHideChecked;
 @synthesize fontSizeCell = _fontSizeCell;
 @synthesize sortByCell = _sortByCell;
+@synthesize factorySettingConfirm = _factorySettingConfirm;
 
 -(ShoppingListSettingManager*) mySettingManager
 {
@@ -54,6 +56,24 @@
     self.mySettingManager.sortingOrder = sortBy;
     self.sortByCell.detailTextLabel.text = [self.mySettingManager showSortingOrder];
 }
+
+# pragma mark - action sheet
+-(UIActionSheet*) factorySettingConfirm
+{
+    if (!_factorySettingConfirm) {
+        _factorySettingConfirm = [[UIActionSheet alloc] initWithTitle:@"Are you sure you want to revert to factory setting" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Cancel" otherButtonTitles:@"Yes, revert.",nil];
+    }
+    return _factorySettingConfirm;
+}
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==0) {
+        [self resetAppSetting];
+        self.fontSizeCell.detailTextLabel.text = self.mySettingManager.fontSize;
+        self.sortByCell.detailTextLabel.text = [self.mySettingManager showSortingOrder];
+    }
+}
+
 # pragma mark - action methods for upon user's selection
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -74,12 +94,14 @@
     
 }
 - (IBAction)autoHideSwitchChanged:(UISwitch *)sender {
-    NSLog(@"auto Hide changed");
+    self.mySettingManager.whetherHideItemImediately = sender.on;
+    NSLog(@"auto Hide changed:%@",(sender.on?@"yes":@"no"));
 }
 
 -(void) resetAppSetting
 {
-    NSLog(@"reset");
+    [self.factorySettingConfirm showFromToolbar:self.navigationController.toolbar ];
+     NSLog(@"reset");
 }
 -(void) shareViaSMS
 {
@@ -221,5 +243,6 @@
     [super viewDidLoad];
     self.fontSizeCell.detailTextLabel.text = self.mySettingManager.fontSize;
     self.sortByCell.detailTextLabel.text = [self.mySettingManager showSortingOrder];
+    self.autoHideChecked.on = self.mySettingManager.whetherHideItemImediately;
 }
 @end

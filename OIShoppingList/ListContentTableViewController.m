@@ -7,11 +7,10 @@
 //
 
 #import "ListContentTableViewController.h"
-#import "EditEntryViewController.h"
+#import "EditingItemDetailTableViewControllerViewController.h"
 #import "ShoppingListSettingManager.h"
-#import "EditEntryViewController.h"
 #import "Units.h"
-@interface ListContentTableViewController()
+@interface ListContentTableViewController()<MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *addNewItemTextField;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cleanUp;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *details;
@@ -49,22 +48,21 @@
 }
 #pragma mark - SMS sharing
 -(NSString*)getSharedListInText
-{/*
+{
     NSString* text = @"";
     NSArray * list =[self.fetchedResultsController fetchedObjects];
-    Items *listEntry = nil; 
+    Contains *listEntry = nil; 
 
     for (listEntry in list) {
         if(listEntry.quantity)
             text = [[text stringByAppendingString:listEntry.quantity.description] stringByAppendingString:@" "];
-        if(listEntry.unit)
-            text= [[text stringByAppendingString:listEntry.unit] stringByAppendingString:@" "];
-        if(listEntry.tittle)
-            text =[text stringByAppendingString:listEntry.tittle];
+        if(listEntry.item_id.unit)
+            text= [[text stringByAppendingString:listEntry.item_id.unit.name] stringByAppendingString:@" "];
+        if(listEntry.item_id)
+            text =[text stringByAppendingString:listEntry.item_id.name];
         text = [text stringByAppendingString:@"\n"];
     }
-    return text;*/
-    return @"";
+    return text;
 
 }
 
@@ -261,6 +259,7 @@
 }
 
 //set the listEntry property of the EditDetail view, so that it can access the database
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
@@ -270,7 +269,7 @@
 }
 #pragma mark - UITableViewDeligate
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
-    EditEntryViewController * entryDetail =[self.storyboard instantiateViewControllerWithIdentifier:@"entryDetail"];
+    EditingItemDetailTableViewControllerViewController * entryDetail =[self.storyboard instantiateViewControllerWithIdentifier:@"entryDetail"];
     entryDetail.entry = [self.fetchedResultsController objectAtIndexPath:indexPath]; 
     [self.navigationController pushViewController:entryDetail animated:YES];
 }
@@ -279,6 +278,15 @@
     self.listEntry = [self.fetchedResultsController objectAtIndexPath:indexPath]; 
     [self.listEntry toggleChecked];
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:YES animated:NO];
+    if(self.mySettingManager.whetherHideItemImediately)
+    {
+        for(Contains* temp in self.listToDisplay.contains_id)
+        {
+            if([temp isChecked]== TRUE)
+                [temp cleanItem];
+            [self.tableView reloadData];
+        }
+    }
 
 }
 -(UITableViewCellEditingStyle) tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -287,7 +295,7 @@
     if(![temp needDisplay])
         return UITableViewCellEditingStyleInsert;
     else 
-        return UITableViewCellEditingStyleNone;
+        return UITableViewCellEditingStyleDelete;
 
 }
 
@@ -298,16 +306,12 @@
         Contains * temp = [self.fetchedResultsController objectAtIndexPath:indexPath]; 
         [temp rescueItem];
         [tableView reloadData];
-    }/*
+    }
     else if(editingStyle == UITableViewCellEditingStyleDelete)
     {
         Contains * temp = [self.fetchedResultsController objectAtIndexPath:indexPath]; 
-        Lists * tempList = temp.list_id;
-        NSMutableArray * tempMutable = [temp.listedIn mutableCopy];
-        [tempMutable removeObject: temp];
-        tempList.needToBuy = [NSArray arrayWithArray:tempMutable];
-        [tableView reloadData];
-    }*/
+        [self.listToDisplay.managedObjectContext deleteObject:temp];
+    }
 }
 #pragma mark - generated code
 - (void)didReceiveMemoryWarning

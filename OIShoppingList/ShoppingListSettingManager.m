@@ -9,6 +9,7 @@
 #import "ShoppingListSettingManager.h"
 #define FONT_SIZE @"OIShoppingList.userSetting.FontSize"
 #define SORTING_ORDER  @"OIShoppingList.userSetting.SortingOrder"
+#define AUTO_HIDE @"OIShoppingList.userSetting.AutoHide"
 
 @interface ShoppingListSettingManager()
 @property (strong, nonatomic) NSUserDefaults* myDefaults;
@@ -20,8 +21,17 @@
 @synthesize sortingOrder = _sortingOrder;
 @synthesize fontSize= _fontSize;
 @synthesize whetherShowFilter = _whetherShowFilter;
-@synthesize whetherHideItemImediately = _whetherHideItemImediately;
 
+-(void) setWhetherHideItemImediately:(Boolean)whetherHideItemImediately
+{
+    [self.myDefaults setObject:[NSNumber numberWithBool:whetherHideItemImediately ] forKey:AUTO_HIDE];
+     [self.myDefaults synchronize];
+}
+-(Boolean) whetherHideItemImediately
+{
+    NSNumber* temp = [self.myDefaults objectForKey:AUTO_HIDE];
+    return [[NSNumber numberWithBool:YES] isEqualToNumber:temp];
+}
 -(NSArray *) getSortDescriptor;
 {
     /*Keys defined in data model:
@@ -44,25 +54,27 @@
 
         if([tempSetting isEqualToString: @"sorting order checked"])
         {
-            /*tempDescriptor = [[NSSortDescriptor alloc]
-              initWithKey:@"marked"
-                              ascending:YES];*/
+            tempDescriptor = [[NSSortDescriptor alloc]
+              initWithKey:@"status"
+                              ascending:NO];
         }else if ([tempSetting isEqualToString:@"sorting order alphabetical"]) {
             tempDescriptor = [[NSSortDescriptor alloc]
                               initWithKey:@"item_id.name"
                               ascending:YES
                               selector:@selector(localizedCaseInsensitiveCompare:)] ;
         }else if ([tempSetting isEqualToString:@"sorting order newest"]) {
-           /*to be implement*/
+            tempDescriptor = [[NSSortDescriptor alloc]
+                              initWithKey:@"modified"
+                              ascending:YES] ;
         }else if ([tempSetting isEqualToString:@"sorting order tag" ]) {
             tempDescriptor = [[NSSortDescriptor alloc]
                               initWithKey:@"item_id.tags"
                               ascending:YES
                               selector:@selector(localizedCaseInsensitiveCompare:)] ;
         }else if ([tempSetting isEqualToString:@"sorting order prioriety"]) {
-           /* tempDescriptor = [[NSSortDescriptor alloc]
-                              initWithKey:@"priority"
-                              ascending:YES];*/
+           tempDescriptor = [[NSSortDescriptor alloc]
+                              initWithKey:@"prioriety"
+                              ascending:YES];
         }else if ( [tempSetting isEqualToString:@"sorting order price" ]) {
            /*to be impelmented*/
         }else {
@@ -125,7 +137,8 @@
                                   @"sorting order price", nil
                                   ];
     [self.myDefaults setObject:[NSArray arrayWithArray:tempArray] forKey:SORTING_ORDER];
-    
+    [self.myDefaults setObject:[NSNumber numberWithBool:NO] forKey:AUTO_HIDE];
+
     [self.myDefaults synchronize];
 }
 

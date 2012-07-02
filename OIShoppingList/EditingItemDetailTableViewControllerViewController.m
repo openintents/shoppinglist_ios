@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *note;
 @property (strong, nonatomic) IBOutlet UIPickerView *myPickerView;
 @property (strong,nonatomic)NSArray* myPickerData;
+@property (strong, nonatomic) IBOutlet UIStepper *myStepper;
 
 @property Boolean debug;
 
@@ -36,23 +37,16 @@
 
 @synthesize entry = _entry;
 @synthesize myPickerData = _myPickerData;
+@synthesize myStepper = _myStepper;
 @synthesize debug = _debug;
 
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
-}
+
 - (IBAction)finishTypingProduct:(id)sender {
     [sender resignFirstResponder];
+    self.title = self.product.text;
     [self saveEditingIntoCoreData];
 }
 - (IBAction)finishTypingTag:(id)sender {
@@ -71,7 +65,6 @@
 }
 
 - (IBAction)finishTypingUnit:(id)sender {
-    
     [self saveEditingIntoCoreData];
     [self.myPickerView reloadAllComponents];
     int myIndex;
@@ -81,12 +74,17 @@
             myIndex = [data indexOfObject:temp];
             break;
         }
+
     }
-    
     [self.myPickerView selectRow: myIndex inComponent:0 animated:YES];
     [sender resignFirstResponder];
 }
+- (IBAction)stepperVelueChanged:(UIStepper *)sender {
+    double value = [sender value];
+    
+    self.quantity.text = [NSString stringWithFormat:@"%d", (int)value];
 
+}
 
 -(NSArray*)myPickerData
 {
@@ -144,6 +142,7 @@
     self.tag.text= self.entry.item_id.tags;
     self.note.text= @"";
     self.entry.accessed =[NSDate date];
+    self.myStepper.value = [self.entry.quantity doubleValue];
     
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -165,12 +164,12 @@
             break;
         }
     }
-    
     [self.myPickerView selectRow: myIndex inComponent:0 animated:NO];
+    self.title = self.entry.item_id.name;
+
 }
 
 #pragma mark - Generated Livecycle Code
-
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -194,6 +193,7 @@
 
 - (void)viewDidUnload
 {
+    [self setMyStepper:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

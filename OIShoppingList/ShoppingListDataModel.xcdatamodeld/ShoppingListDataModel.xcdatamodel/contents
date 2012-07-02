@@ -47,7 +47,7 @@
         <attribute name="share_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="store_filter" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="tags_filter" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <relationship name="contains_id" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contains" inverseName="list_id" inverseEntity="Contains" syncable="YES"/>
+        <relationship name="contains_id" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Contains" inverseName="list_id" inverseEntity="Contains" syncable="YES"/>
         <relationship name="store_id" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Stores" inverseName="list_id" inverseEntity="Stores" syncable="YES"/>
     </entity>
     <entity name="Stores" representedClassName="Stores" syncable="YES">
@@ -65,11 +65,11 @@
         <relationship name="item_id" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Items" inverseName="unit" inverseEntity="Items" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Items" positionX="-81" positionY="6" width="128" height="240"/>
-        <element name="Stores" positionX="-74" positionY="-174" width="128" height="120"/>
-        <element name="Lists" positionX="-459" positionY="-117" width="128" height="210"/>
-        <element name="Itemsstores" positionX="180" positionY="-27" width="128" height="150"/>
         <element name="Contains" positionX="-279" positionY="105" width="128" height="210"/>
+        <element name="Items" positionX="-81" positionY="6" width="128" height="240"/>
+        <element name="Itemsstores" positionX="180" positionY="-27" width="128" height="150"/>
+        <element name="Lists" positionX="-459" positionY="-117" width="128" height="210"/>
+        <element name="Stores" positionX="-74" positionY="-174" width="128" height="120"/>
         <element name="Units" positionX="142" positionY="234" width="128" height="120"/>
     </elements>
 </model>

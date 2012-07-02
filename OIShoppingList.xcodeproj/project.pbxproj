@@ -27,7 +27,6 @@
 		114B9C48155AF409003F785C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 114B9C46155AF409003F785C /* InfoPlist.strings */; };
 		114B9C4B155AF409003F785C /* OIShoppingListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 114B9C4A155AF409003F785C /* OIShoppingListTests.m */; };
 		114F7EA7155ECB11002209AF /* ListContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 114F7EA6155ECB11002209AF /* ListContentTableViewController.m */; };
-		114F7EAD155EF134002209AF /* EditEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 114F7EAC155EF134002209AF /* EditEntryViewController.m */; };
 		115FC7011590C274002FBC83 /* Items+Manage.m in Sources */ = {isa = PBXBuildFile; fileRef = 115FC7001590C274002FBC83 /* Items+Manage.m */; };
 		115FC7041590C2A2002FBC83 /* Lists+Manage.m in Sources */ = {isa = PBXBuildFile; fileRef = 115FC7031590C2A2002FBC83 /* Lists+Manage.m */; };
 		115FC7071590C3B0002FBC83 /* Contains+Manage.m in Sources */ = {isa = PBXBuildFile; fileRef = 115FC7061590C3AF002FBC83 /* Contains+Manage.m */; };
@@ -44,7 +43,6 @@
 		11C4AD4A155D0B4A00CE7C7C /* ShoppingListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C4AD48155D0B4A00CE7C7C /* ShoppingListTableViewController.m */; };
 		11CD1963155D489B0003012B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CD1962155D489B0003012B /* CoreData.framework */; };
 		11F1CCBE156675D0000FB0E1 /* ShoppingListSettingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F1CCBD156675D0000FB0E1 /* ShoppingListSettingManager.m */; };
-		11F1CCC9156693A2000FB0E1 /* MyTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F1CCC8156693A2000FB0E1 /* MyTestViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,8 +85,6 @@
 		114B9C4A155AF409003F785C /* OIShoppingListTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OIShoppingListTests.m; sourceTree = "<group>"; };
 		114F7EA5155ECB11002209AF /* ListContentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListContentTableViewController.h; sourceTree = "<group>"; };
 		114F7EA6155ECB11002209AF /* ListContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListContentTableViewController.m; sourceTree = "<group>"; };
-		114F7EAB155EF134002209AF /* EditEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditEntryViewController.h; sourceTree = "<group>"; };
-		114F7EAC155EF134002209AF /* EditEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditEntryViewController.m; sourceTree = "<group>"; };
 		115FC6FF1590C274002FBC83 /* Items+Manage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Items+Manage.h"; sourceTree = "<group>"; };
 		115FC7001590C274002FBC83 /* Items+Manage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Items+Manage.m"; sourceTree = "<group>"; };
 		115FC7021590C2A1002FBC83 /* Lists+Manage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Lists+Manage.h"; sourceTree = "<group>"; };
@@ -119,8 +115,6 @@
 		11CD1962155D489B0003012B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		11F1CCBC156675D0000FB0E1 /* ShoppingListSettingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingListSettingManager.h; sourceTree = "<group>"; };
 		11F1CCBD156675D0000FB0E1 /* ShoppingListSettingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingListSettingManager.m; sourceTree = "<group>"; };
-		11F1CCC7156693A2000FB0E1 /* MyTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTestViewController.h; sourceTree = "<group>"; };
-		11F1CCC8156693A2000FB0E1 /* MyTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTestViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,16 +194,12 @@
 			isa = PBXGroup;
 			children = (
 				114B9C2E155AF408003F785C /* MainStoryboard_iPhone.storyboard */,
-				116283B115934D2500C025F6 /* EditingItemDetailTableViewControllerViewController.h */,
-				116283B215934D2500C025F6 /* EditingItemDetailTableViewControllerViewController.m */,
-				11F1CCC7156693A2000FB0E1 /* MyTestViewController.h */,
-				11F1CCC8156693A2000FB0E1 /* MyTestViewController.m */,
-				114F7EAB155EF134002209AF /* EditEntryViewController.h */,
-				114F7EAC155EF134002209AF /* EditEntryViewController.m */,
 				11C4AD47155D0B4A00CE7C7C /* ShoppingListTableViewController.h */,
 				11C4AD48155D0B4A00CE7C7C /* ShoppingListTableViewController.m */,
 				114F7EA5155ECB11002209AF /* ListContentTableViewController.h */,
 				114F7EA6155ECB11002209AF /* ListContentTableViewController.m */,
+				116283B115934D2500C025F6 /* EditingItemDetailTableViewControllerViewController.h */,
+				116283B215934D2500C025F6 /* EditingItemDetailTableViewControllerViewController.m */,
 				113C982B156797B400AFD094 /* Options */,
 				11C289DD155D2E4300BC089D /* DataModel */,
 				114B9C23155AF408003F785C /* Supporting Files */,
@@ -397,9 +387,7 @@
 				117D405B155D0D2200AD6F4E /* ShoppingListDataModel.xcdatamodeld in Sources */,
 				11C289E4155D3EC300BC089D /* CoreDataTableViewController.m in Sources */,
 				114F7EA7155ECB11002209AF /* ListContentTableViewController.m in Sources */,
-				114F7EAD155EF134002209AF /* EditEntryViewController.m in Sources */,
 				11F1CCBE156675D0000FB0E1 /* ShoppingListSettingManager.m in Sources */,
-				11F1CCC9156693A2000FB0E1 /* MyTestViewController.m in Sources */,
 				11330E121566FDDE006691BF /* OptionsTableViewController.m in Sources */,
 				113C98261567925800AFD094 /* SelectFontSizeTableViewController.m in Sources */,
 				113C982A1567927100AFD094 /* SelectSortingRuleTableViewController.m in Sources */,

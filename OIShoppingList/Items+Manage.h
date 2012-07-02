@@ -11,7 +11,6 @@
 @interface Items (Manage)
 +(Items *) creatItemsWithName:(NSString *) name
        inManagedObjectContext:(NSManagedObjectContext *)context;
--(void) setUnit:(Units *)unit;
 -(void) updateItemName:(NSString*)name
                   unit:(NSString*)unit
                   tags:(NSString*)tags;

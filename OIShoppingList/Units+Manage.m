@@ -25,6 +25,7 @@
     
     if (!unitArray || ([unitArray count] > 1)) {
         // handle error
+        NSLog(@"error occur");
     } else if (![unitArray count]) {
         unit = [NSEntityDescription insertNewObjectForEntityForName:@"Units"
                                                  inManagedObjectContext:context];
@@ -32,9 +33,12 @@
         [unit addItem_idObject:item];
         unit.created= [NSDate date];
         unit.modified = [NSDate date];
-        NSLog(@"added new contains %@", [unit description]);
+        NSLog(@"added new unit =====%@", [unit description]);
     } else {
         unit   = [unitArray lastObject];
+        [unit addItem_idObject:item];
+        NSLog(@"existed unit:===>\nR%@", [self description]);
+
     }
     
     return unit;

@@ -55,11 +55,16 @@
         self.tags = tags;
         self.modified = [NSDate date];
     }
-    if(![self.unit.name isEqualToString:unit])
+    if(![unit isEqualToString:self.unit.name])
     {
-        [Units getUnitWithName:unit forItem:self inManagedObjectContext:[self managedObjectContext]];
-        self.modified = [NSDate date];
+        if(![unit isEqualToString:@""])
+        {
+            [Units getUnitWithName:unit forItem:self inManagedObjectContext:[self managedObjectContext]];
+            self.modified = [NSDate date];
+            //NSLog(@"new unit added with name:===>\n\n%@",unit);
+        }
     }
+    //NSLog(@"update item:========>\n%@",[ self description]);
 
 }
 
