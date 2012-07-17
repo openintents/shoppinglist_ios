@@ -16,8 +16,8 @@
 @property (strong, nonatomic) IBOutlet UITextField *tag;
 @property (strong, nonatomic) IBOutlet UITextField *price;
 @property (strong, nonatomic) IBOutlet UITextField *note;
-@property (strong, nonatomic) IBOutlet UIPickerView *myPickerView;
-@property (strong,nonatomic)NSArray* myPickerData;
+@property (strong, nonatomic) IBOutlet UIPickerView *myPickerViewUnits;
+@property (strong,nonatomic)NSArray* myPickerDataUnits;
 @property (strong, nonatomic) IBOutlet UIStepper *myStepper;
 
 @property Boolean debug;
@@ -33,10 +33,10 @@
 @synthesize tag = _tag;
 @synthesize price = _price;
 @synthesize note = _note;
-@synthesize myPickerView = _myPickerView;
+@synthesize myPickerViewUnits = _myPickerViewUnits;
 
 @synthesize entry = _entry;
-@synthesize myPickerData = _myPickerData;
+@synthesize myPickerDataUnits = _myPickerDataUnits;
 @synthesize myStepper = _myStepper;
 @synthesize debug = _debug;
 
@@ -66,9 +66,9 @@
 
 - (IBAction)finishTypingUnit:(id)sender {
     [self saveEditingIntoCoreData];
-    [self.myPickerView reloadAllComponents];
+    [self.myPickerViewUnits reloadAllComponents];
     int myIndex;
-    NSArray* data = self.myPickerData;
+    NSArray* data = self.myPickerDataUnits;
     for (Units* temp in data) {
         if ([temp.name isEqualToString:((UITextView*)sender).text]) {
             myIndex = [data indexOfObject:temp];
@@ -76,7 +76,7 @@
         }
 
     }
-    [self.myPickerView selectRow: myIndex inComponent:0 animated:YES];
+    [self.myPickerViewUnits selectRow: myIndex inComponent:0 animated:YES];
     [sender resignFirstResponder];
 }
 - (IBAction)stepperVelueChanged:(UIStepper *)sender {
@@ -86,25 +86,25 @@
 
 }
 
--(NSArray*)myPickerData
+-(NSArray*)myPickerDataUnits
 {
     NSManagedObjectContext* context=self.entry.managedObjectContext;
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Units" inManagedObjectContext:context];
         [request setEntity:entity];
     NSError *error;
-    _myPickerData = [context executeFetchRequest:request error:&error];
-    return _myPickerData;
+    _myPickerDataUnits = [context executeFetchRequest:request error:&error];
+    return _myPickerDataUnits;
 }
 
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow: (NSInteger)row inComponent:(NSInteger)component {    
-    self.unit.text = ((Units*)[self.myPickerData objectAtIndex:row]).name;
+    self.unit.text = ((Units*)[self.myPickerDataUnits objectAtIndex:row]).name;
 }
 
 // tell the picker how many rows are available for a given component
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return self.myPickerData.count;
+    return self.myPickerDataUnits.count;
 }
 
 // tell the picker how many components it will have
@@ -115,7 +115,7 @@
 // tell the picker the title for a given component
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     NSString *title;
-    title = ((Units*)[self.myPickerData objectAtIndex:row]).name ;
+    title = ((Units*)[self.myPickerDataUnits objectAtIndex:row]).name ;
     
     return title;
 }
@@ -157,16 +157,24 @@
     [super viewWillAppear:animated];
     [self loadTextFromCoreDataToTextFields];
     int myIndex;
-    NSArray* data = self.myPickerData;
+    NSArray* data = self.myPickerDataUnits;
     for (Units* temp in data) {
         if ([temp.name isEqualToString:self.unit.text]) {
             myIndex = [data indexOfObject:temp];
             break;
         }
     }
-    [self.myPickerView selectRow: myIndex inComponent:0 animated:NO];
+    [self.myPickerViewUnits selectRow: myIndex inComponent:0 animated:NO];
     self.title = self.entry.item_id.name;
 
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    if ([segue.destinationViewController respondsToSelector:@selector(setContain:)]) {
+        [segue.destinationViewController performSelector:@selector(setContain:) withObject:self.entry];
+    }
 }
 
 #pragma mark - Generated Livecycle Code

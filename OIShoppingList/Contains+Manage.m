@@ -11,6 +11,18 @@
 #import "Items+Manage.h"
 
 @implementation Contains (Manage)
+
+-(void) setThePrice:(NSNumber*)price
+    inStoreWithName:(NSString*)storeName;
+{
+    Stores* store = nil;
+    store = [Stores getStoreWithName:storeName inList:self.list_id inManagedObjectContext:self.managedObjectContext];
+    Itemsstores* itemsstore =[Itemsstores getItemsstoresReadyForItem:self.item_id inStore:store inManagedObjectContext:self.managedObjectContext];
+    itemsstore.price = price;
+}
+
+
+
 +(Contains*) creatContainsBetweenItem:(Items*) items 
                               andList:(Lists*) list 
                inManagedObjectContext:(NSManagedObjectContext*) context

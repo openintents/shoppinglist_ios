@@ -2,7 +2,7 @@
 //  Stores.m
 //  OIShoppingList
 //
-//  Created by Tian Hongyu on 19/6/12.
+//  Created by Tian Hongyu on 15/7/12.
 //  Copyright (c) 2012 OpenIntents. All rights reserved.
 //
 
@@ -13,10 +13,10 @@
 
 @implementation Stores
 
-@dynamic name;
 @dynamic created;
 @dynamic modified;
-@dynamic list_id;
+@dynamic name;
 @dynamic itemstores_id;
+@dynamic list_id;
 
 @end

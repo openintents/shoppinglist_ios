@@ -55,7 +55,7 @@
         <attribute name="modified" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="itemstores_id" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Itemsstores" inverseName="store_id" inverseEntity="Itemsstores" syncable="YES"/>
-        <relationship name="list_id" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Lists" inverseName="store_id" inverseEntity="Lists" syncable="YES"/>
+        <relationship name="list_id" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lists" inverseName="store_id" inverseEntity="Lists" syncable="YES"/>
     </entity>
     <entity name="Units" representedClassName="Units" syncable="YES">
         <attribute name="created" optional="YES" attributeType="Date" syncable="YES"/>

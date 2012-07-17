@@ -2,7 +2,7 @@
 //  Stores.h
 //  OIShoppingList
 //
-//  Created by Tian Hongyu on 19/6/12.
+//  Created by Tian Hongyu on 15/7/12.
 //  Copyright (c) 2012 OpenIntents. All rights reserved.
 //
 
@@ -13,19 +13,14 @@
 
 @interface Stores : NSManagedObject
 
-@property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSDate * created;
 @property (nonatomic, retain) NSDate * modified;
-@property (nonatomic, retain) NSSet *list_id;
+@property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *itemstores_id;
+@property (nonatomic, retain) Lists *list_id;
 @end
 
 @interface Stores (CoreDataGeneratedAccessors)
-
-- (void)addList_idObject:(Lists *)value;
-- (void)removeList_idObject:(Lists *)value;
-- (void)addList_id:(NSSet *)values;
-- (void)removeList_id:(NSSet *)values;
 
 - (void)addItemstores_idObject:(Itemsstores *)value;
 - (void)removeItemstores_idObject:(Itemsstores *)value;

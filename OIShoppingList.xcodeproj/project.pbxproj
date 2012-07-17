@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		1111CAC9156D1F16009F5CB7 /* checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 1111CAC7156D1F16009F5CB7 /* checkMark.png */; };
 		1111CACA156D1F16009F5CB7 /* noCheckMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 1111CAC8156D1F16009F5CB7 /* noCheckMark.png */; };
+		11298BF815B2779200314E2E /* Stores.m in Sources */ = {isa = PBXBuildFile; fileRef = 11298BF715B2779200314E2E /* Stores.m */; };
+		11298BFF15B277B100314E2E /* Contains.m in Sources */ = {isa = PBXBuildFile; fileRef = 11298BFE15B277B100314E2E /* Contains.m */; };
+		11298C0215B3C0D400314E2E /* PriceStoreTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11298C0115B3C0D400314E2E /* PriceStoreTableViewController.m */; };
 		11330E121566FDDE006691BF /* OptionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11330E111566FDDE006691BF /* OptionsTableViewController.m */; };
 		113C98261567925800AFD094 /* SelectFontSizeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113C98251567925800AFD094 /* SelectFontSizeTableViewController.m */; };
 		113C982A1567927100AFD094 /* SelectSortingRuleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113C98291567927100AFD094 /* SelectSortingRuleTableViewController.m */; };
@@ -32,12 +35,13 @@
 		115FC7071590C3B0002FBC83 /* Contains+Manage.m in Sources */ = {isa = PBXBuildFile; fileRef = 115FC7061590C3AF002FBC83 /* Contains+Manage.m */; };
 		115FC70A1590C95F002FBC83 /* Lists.m in Sources */ = {isa = PBXBuildFile; fileRef = 115FC7091590C95F002FBC83 /* Lists.m */; };
 		115FC70D1590C960002FBC83 /* Items.m in Sources */ = {isa = PBXBuildFile; fileRef = 115FC70C1590C95F002FBC83 /* Items.m */; };
-		115FC7101590C960002FBC83 /* Stores.m in Sources */ = {isa = PBXBuildFile; fileRef = 115FC70F1590C960002FBC83 /* Stores.m */; };
 		115FC7131590C961002FBC83 /* Itemsstores.m in Sources */ = {isa = PBXBuildFile; fileRef = 115FC7121590C961002FBC83 /* Itemsstores.m */; };
-		115FC7161590C961002FBC83 /* Contains.m in Sources */ = {isa = PBXBuildFile; fileRef = 115FC7151590C961002FBC83 /* Contains.m */; };
 		115FC7191590C961002FBC83 /* Units.m in Sources */ = {isa = PBXBuildFile; fileRef = 115FC7181590C961002FBC83 /* Units.m */; };
 		116283B315934D2500C025F6 /* EditingItemDetailTableViewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116283B215934D2500C025F6 /* EditingItemDetailTableViewControllerViewController.m */; };
+		116F059615B4EA81008C2C3A /* PriceTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 116F059515B4EA81008C2C3A /* PriceTextField.m */; };
 		117D405B155D0D2200AD6F4E /* ShoppingListDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 117D4059155D0D2200AD6F4E /* ShoppingListDataModel.xcdatamodeld */; };
+		11B6543315B00EEF00481D35 /* Stores+Manage.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B6543215B00EEF00481D35 /* Stores+Manage.m */; };
+		11B6543915B0120000481D35 /* Itemsstores+Manage.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B6543815B0120000481D35 /* Itemsstores+Manage.m */; };
 		11B703BC1591DCF800B06BA6 /* Units+Manage.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B703BB1591DCF800B06BA6 /* Units+Manage.m */; };
 		11C289E4155D3EC300BC089D /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C289E2155D3EC200BC089D /* CoreDataTableViewController.m */; };
 		11C4AD4A155D0B4A00CE7C7C /* ShoppingListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C4AD48155D0B4A00CE7C7C /* ShoppingListTableViewController.m */; };
@@ -58,6 +62,12 @@
 /* Begin PBXFileReference section */
 		1111CAC7156D1F16009F5CB7 /* checkMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkMark.png; sourceTree = "<group>"; };
 		1111CAC8156D1F16009F5CB7 /* noCheckMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noCheckMark.png; sourceTree = "<group>"; };
+		11298BF615B2779200314E2E /* Stores.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stores.h; sourceTree = "<group>"; };
+		11298BF715B2779200314E2E /* Stores.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stores.m; sourceTree = "<group>"; };
+		11298BFD15B277B100314E2E /* Contains.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contains.h; sourceTree = "<group>"; };
+		11298BFE15B277B100314E2E /* Contains.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contains.m; sourceTree = "<group>"; };
+		11298C0015B3C0D400314E2E /* PriceStoreTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceStoreTableViewController.h; sourceTree = "<group>"; };
+		11298C0115B3C0D400314E2E /* PriceStoreTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceStoreTableViewController.m; sourceTree = "<group>"; };
 		11330E101566FDDE006691BF /* OptionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsTableViewController.h; sourceTree = "<group>"; };
 		11330E111566FDDE006691BF /* OptionsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsTableViewController.m; sourceTree = "<group>"; };
 		113C98241567925800AFD094 /* SelectFontSizeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectFontSizeTableViewController.h; sourceTree = "<group>"; };
@@ -95,17 +105,19 @@
 		115FC7091590C95F002FBC83 /* Lists.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lists.m; sourceTree = "<group>"; };
 		115FC70B1590C95F002FBC83 /* Items.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Items.h; sourceTree = "<group>"; };
 		115FC70C1590C95F002FBC83 /* Items.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Items.m; sourceTree = "<group>"; };
-		115FC70E1590C960002FBC83 /* Stores.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stores.h; sourceTree = "<group>"; };
-		115FC70F1590C960002FBC83 /* Stores.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stores.m; sourceTree = "<group>"; };
 		115FC7111590C960002FBC83 /* Itemsstores.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Itemsstores.h; sourceTree = "<group>"; };
 		115FC7121590C961002FBC83 /* Itemsstores.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Itemsstores.m; sourceTree = "<group>"; };
-		115FC7141590C961002FBC83 /* Contains.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contains.h; sourceTree = "<group>"; };
-		115FC7151590C961002FBC83 /* Contains.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contains.m; sourceTree = "<group>"; };
 		115FC7171590C961002FBC83 /* Units.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Units.h; sourceTree = "<group>"; };
 		115FC7181590C961002FBC83 /* Units.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Units.m; sourceTree = "<group>"; };
 		116283B115934D2500C025F6 /* EditingItemDetailTableViewControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditingItemDetailTableViewControllerViewController.h; sourceTree = "<group>"; };
 		116283B215934D2500C025F6 /* EditingItemDetailTableViewControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditingItemDetailTableViewControllerViewController.m; sourceTree = "<group>"; };
+		116F059415B4EA81008C2C3A /* PriceTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceTextField.h; sourceTree = "<group>"; };
+		116F059515B4EA81008C2C3A /* PriceTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceTextField.m; sourceTree = "<group>"; };
 		117D405A155D0D2200AD6F4E /* ShoppingListDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShoppingListDataModel.xcdatamodel; sourceTree = "<group>"; };
+		11B6543115B00EEF00481D35 /* Stores+Manage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Stores+Manage.h"; sourceTree = "<group>"; };
+		11B6543215B00EEF00481D35 /* Stores+Manage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Stores+Manage.m"; sourceTree = "<group>"; };
+		11B6543715B0120000481D35 /* Itemsstores+Manage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Itemsstores+Manage.h"; sourceTree = "<group>"; };
+		11B6543815B0120000481D35 /* Itemsstores+Manage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Itemsstores+Manage.m"; sourceTree = "<group>"; };
 		11B703BA1591DCF800B06BA6 /* Units+Manage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Units+Manage.h"; sourceTree = "<group>"; };
 		11B703BB1591DCF800B06BA6 /* Units+Manage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Units+Manage.m"; sourceTree = "<group>"; };
 		11C289E2155D3EC200BC089D /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
@@ -194,6 +206,10 @@
 			isa = PBXGroup;
 			children = (
 				114B9C2E155AF408003F785C /* MainStoryboard_iPhone.storyboard */,
+				11298C0015B3C0D400314E2E /* PriceStoreTableViewController.h */,
+				11298C0115B3C0D400314E2E /* PriceStoreTableViewController.m */,
+				116F059415B4EA81008C2C3A /* PriceTextField.h */,
+				116F059515B4EA81008C2C3A /* PriceTextField.m */,
 				11C4AD47155D0B4A00CE7C7C /* ShoppingListTableViewController.h */,
 				11C4AD48155D0B4A00CE7C7C /* ShoppingListTableViewController.m */,
 				114F7EA5155ECB11002209AF /* ListContentTableViewController.h */,
@@ -248,24 +264,28 @@
 				117D4059155D0D2200AD6F4E /* ShoppingListDataModel.xcdatamodeld */,
 				115FC7171590C961002FBC83 /* Units.h */,
 				115FC7181590C961002FBC83 /* Units.m */,
-				115FC7141590C961002FBC83 /* Contains.h */,
-				115FC7151590C961002FBC83 /* Contains.m */,
 				115FC7111590C960002FBC83 /* Itemsstores.h */,
 				115FC7121590C961002FBC83 /* Itemsstores.m */,
-				115FC70E1590C960002FBC83 /* Stores.h */,
-				115FC70F1590C960002FBC83 /* Stores.m */,
+				11298BF615B2779200314E2E /* Stores.h */,
+				11298BF715B2779200314E2E /* Stores.m */,
 				115FC70B1590C95F002FBC83 /* Items.h */,
 				115FC70C1590C95F002FBC83 /* Items.m */,
 				115FC7081590C95F002FBC83 /* Lists.h */,
 				115FC7091590C95F002FBC83 /* Lists.m */,
-				11B703BA1591DCF800B06BA6 /* Units+Manage.h */,
-				11B703BB1591DCF800B06BA6 /* Units+Manage.m */,
+				11298BFD15B277B100314E2E /* Contains.h */,
+				11298BFE15B277B100314E2E /* Contains.m */,
 				115FC7051590C3AF002FBC83 /* Contains+Manage.h */,
 				115FC7061590C3AF002FBC83 /* Contains+Manage.m */,
 				115FC7021590C2A1002FBC83 /* Lists+Manage.h */,
 				115FC7031590C2A2002FBC83 /* Lists+Manage.m */,
 				115FC6FF1590C274002FBC83 /* Items+Manage.h */,
 				115FC7001590C274002FBC83 /* Items+Manage.m */,
+				11B6543715B0120000481D35 /* Itemsstores+Manage.h */,
+				11B6543815B0120000481D35 /* Itemsstores+Manage.m */,
+				11B6543115B00EEF00481D35 /* Stores+Manage.h */,
+				11B6543215B00EEF00481D35 /* Stores+Manage.m */,
+				11B703BA1591DCF800B06BA6 /* Units+Manage.h */,
+				11B703BB1591DCF800B06BA6 /* Units+Manage.m */,
 				11C289E3155D3EC300BC089D /* CoreDataTableViewController.h */,
 				11C289E2155D3EC200BC089D /* CoreDataTableViewController.m */,
 			);
@@ -396,12 +416,16 @@
 				115FC7071590C3B0002FBC83 /* Contains+Manage.m in Sources */,
 				115FC70A1590C95F002FBC83 /* Lists.m in Sources */,
 				115FC70D1590C960002FBC83 /* Items.m in Sources */,
-				115FC7101590C960002FBC83 /* Stores.m in Sources */,
 				115FC7131590C961002FBC83 /* Itemsstores.m in Sources */,
-				115FC7161590C961002FBC83 /* Contains.m in Sources */,
 				115FC7191590C961002FBC83 /* Units.m in Sources */,
 				11B703BC1591DCF800B06BA6 /* Units+Manage.m in Sources */,
 				116283B315934D2500C025F6 /* EditingItemDetailTableViewControllerViewController.m in Sources */,
+				11B6543315B00EEF00481D35 /* Stores+Manage.m in Sources */,
+				11B6543915B0120000481D35 /* Itemsstores+Manage.m in Sources */,
+				11298BF815B2779200314E2E /* Stores.m in Sources */,
+				11298BFF15B277B100314E2E /* Contains.m in Sources */,
+				11298C0215B3C0D400314E2E /* PriceStoreTableViewController.m in Sources */,
+				116F059615B4EA81008C2C3A /* PriceTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

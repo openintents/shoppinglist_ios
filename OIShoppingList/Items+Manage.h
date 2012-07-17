@@ -7,6 +7,9 @@
 //
 
 #import "Items.h"
+#import "Stores+Manage.h"
+#import "Itemsstores+Manage.h"
+#import "Contains+Manage.h"
 
 @interface Items (Manage)
 +(Items *) creatItemsWithName:(NSString *) name
@@ -14,4 +17,5 @@
 -(void) updateItemName:(NSString*)name
                   unit:(NSString*)unit
                   tags:(NSString*)tags;
+
 @end

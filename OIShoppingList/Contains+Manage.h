@@ -23,4 +23,6 @@
               itemName:(NSString*)name
                   unit:(NSString*)unit
                   tags:(NSString*)tags;
+-(void) setThePrice:(NSNumber*)price
+    inStoreWithName:(NSString*)name;
 @end
