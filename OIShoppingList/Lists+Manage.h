@@ -9,11 +9,12 @@
 #import "Lists.h"
 #import "Items+Manage.h"
 #import "Contains+Manage.h"
+#import "Stores+Manage.h"
 
 @interface Lists (Manage)
 + (Lists *)createShoppingListWithName:(NSString *)name
                inManagedObjectContext:(NSManagedObjectContext *)context;
 - (void) addItemWithName: (NSString*) itemName 
   inManagedObjectContext:(NSManagedObjectContext*)context;
-
+- (NSSet*)getStoreWisePriceDescription;
 @end

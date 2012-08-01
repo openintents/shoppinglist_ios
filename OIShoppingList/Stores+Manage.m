@@ -55,4 +55,34 @@
     return nil;
 }
 
+-(NSDictionary*) subtotalForItemsAndCalculatedItemsWithinStore
+{
+    double subtotal=0;
+    int availablePrice = 0;
+    int count =0;
+    for (Itemsstores*itemsstore in self.itemstores_id) {
+        Contains* contain = nil;
+        for (contain in itemsstore.item_id.contains_id) {
+            if ([contain.item_id isEqual:itemsstore.item_id]) {
+                count = [contain.quantity intValue];
+            }
+            if ([contain isChecked]) {
+                count = 0;
+            }
+        }
+        
+        if(itemsstore.price)
+        {
+            subtotal = subtotal + (count* [itemsstore.price doubleValue]);
+            availablePrice++;
+        }
+    }
+    NSArray* resultToAdd = [[NSArray alloc]initWithObjects:
+                        [NSNumber numberWithDouble:subtotal],
+                        [NSNumber numberWithInt:availablePrice],
+                            self.name,nil ];
+    NSArray* keysForResults = [[NSArray alloc] initWithObjects: @"subtotal",@"availablePrice",@"name" ,nil ];
+    return [[NSDictionary alloc]initWithObjects:resultToAdd forKeys:keysForResults];
+}
+
 @end

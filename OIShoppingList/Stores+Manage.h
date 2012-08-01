@@ -9,6 +9,7 @@
 #import "Stores.h"
 #import "Items.h"
 #import "Itemsstores.h"
+#import "Contains+Manage.h"
 
 @interface Stores (Manage)
 +(Stores*)getStoreWithName:(NSString*)name 
@@ -16,4 +17,6 @@
     inManagedObjectContext:(NSManagedObjectContext*)context;
 
 -(NSNumber*)priceForItem:(Items*)item;
+
+-(NSDictionary*) subtotalForItemsAndCalculatedItemsWithinStore;
 @end

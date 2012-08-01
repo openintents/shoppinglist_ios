@@ -85,8 +85,7 @@
 
 #pragma mark - creat new entry
 - (IBAction)finishTyping:(UITextField *)sender {
-    
-    [self.contain setThePrice:[NSNumber numberWithInt:0] inStoreWithName:sender.text];
+    [self.contain setThePrice:nil inStoreWithName:sender.text];
 }
 
 #pragma mark - fatch results controller setup
@@ -153,7 +152,7 @@
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return NO;
+    return YES;
 }
 
 
@@ -163,7 +162,11 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        Stores * temp = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        for (Itemsstores * itemsstore in temp.itemstores_id) {
+            [self.contain.managedObjectContext deleteObject:itemsstore];
+        }
+        [self.contain.managedObjectContext deleteObject:temp];
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view

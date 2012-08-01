@@ -10,6 +10,17 @@
 
 @implementation Lists (Manage)
 
+/* @"subtotal",@"availablePrice"*/
+- (NSSet*)getStoreWisePriceDescription
+{
+        
+    NSMutableSet*result = [[NSMutableSet alloc]init];
+    for (Stores* someStore in self.store_id) {
+        [result addObject:[someStore subtotalForItemsAndCalculatedItemsWithinStore]];
+    }
+         return [[NSSet alloc]initWithSet:result];
+    }
+
 + (Lists *)createShoppingListWithName:(NSString *)name
                inManagedObjectContext:(NSManagedObjectContext *)context
 {

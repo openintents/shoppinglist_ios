@@ -8,6 +8,8 @@
 
 #import "ListContentTableViewController.h"
 #import "EditingItemDetailTableViewControllerViewController.h"
+#import "SelectStoreFilterTableViewController.h"
+#import "SelectTagFilterTableViewController.h"
 #import "ShoppingListSettingManager.h"
 #import "Units.h"
 @interface ListContentTableViewController()<MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>
@@ -22,6 +24,7 @@
 @property  int manageModeActive;
 @property (strong,nonatomic) Contains *listEntry;
 @property (strong,nonatomic) UIActionSheet* shareOption;
+@property (strong, nonatomic) IBOutlet UILabel *priceLable;
 
 @end
 
@@ -38,7 +41,21 @@
 @synthesize manageModeActive = _manageModeActive;
 @synthesize mySettingManager = _mySettingManager;
 @synthesize shareOption = _shareOption;
+@synthesize priceLable = _priceLable;
 
+-(void)setSubtotalLable
+{
+    NSString* resultString = @"Subtotals:               ";
+    NSSet* set=[self.listToDisplay getStoreWisePriceDescription];
+    for (NSDictionary* storeDic in set) {
+        // @"subtotal",@"availablePrice",@"name"
+        NSString* storeName = (NSString*)[storeDic objectForKey:@"name"];
+        double storeSubtotal = [((NSNumber*)[storeDic objectForKey:@"subtotal"])doubleValue];
+        NSString*temp = [NSString stringWithFormat:@"%@: $ %5.2lf\n",storeName,storeSubtotal];
+        resultString = [resultString stringByAppendingString:temp];
+    }
+    self.priceLable.text = resultString;
+}
 -(ShoppingListSettingManager*) mySettingManager
 {
     if (!_mySettingManager) {
@@ -127,14 +144,33 @@
 - (IBAction)shareClicked:(id)sender {
     [self.shareOption showFromToolbar:self.navigationController.toolbar];
 }
+- (IBAction)filterClicked:(id)sender {
+    [[[UIActionSheet alloc] initWithTitle:@"filter" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"Filter By Store",@"Filter By Tags", nil] showFromToolbar:self.navigationController.toolbar];
+}
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex==0) {
-        [self displaySMSComposerSheet];
-    }else if (buttonIndex==1) {
-        [self displayMailComposerSheet];
-    }else {
-       // [self.shareOption dismissWithClickedButtonIndex:3 animated:YES];
+    if ([@"share" isEqualToString: actionSheet.title ]) {
+        if (buttonIndex==0) {
+            [self displaySMSComposerSheet];
+        }else if (buttonIndex==1) {
+            [self displayMailComposerSheet];
+        }else {
+            // [self.shareOption dismissWithClickedButtonIndex:3 animated:YES];
+        }
+    }
+    else if ([@"filter" isEqualToString:actionSheet.title]) {
+        if (buttonIndex==0) {
+            SelectStoreFilterTableViewController* destController = [self.navigationController.storyboard instantiateViewControllerWithIdentifier:@"Select Store Filter"];
+            destController.listToDisplay = self.listToDisplay;
+            [self.navigationController pushViewController:destController animated:YES];
+        }else if (buttonIndex==1) {
+            SelectTagFilterTableViewController* destController = [self.navigationController.storyboard instantiateViewControllerWithIdentifier:@"Select Tag Filter"];
+            destController.listToDisplay = self.listToDisplay;
+            [self.navigationController pushViewController:destController animated:YES];
+        }else {
+            // [self.shareOption dismissWithClickedButtonIndex:3 animated:YES];
+        }
+
     }
 }
 
@@ -164,6 +200,9 @@
     _listToDisplay = shoppingList;
     self.title = shoppingList.name;
     [self setupFetchedResultsController];
+    NSLog(@"listToDisplay set to %@",[self.listToDisplay description]);
+
+    
 }
 //Format the cell for table display
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -266,6 +305,10 @@
     if ([segue.destinationViewController respondsToSelector:@selector(setEntry:)]) {
         [segue.destinationViewController performSelector:@selector(setEntry:) withObject:self.listEntry];
     }
+    if ([segue.destinationViewController respondsToSelector:@selector(setListToDisplay:)]) {
+        [segue.destinationViewController performSelector:@selector(setListToDisplay:)withObject:self.listToDisplay];
+        NSLog(@"setDestinationListToDisplay");
+    }
 }
 #pragma mark - UITableViewDeligate
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
@@ -287,6 +330,7 @@
             [self.tableView reloadData];
         }
     }
+    [self setSubtotalLable];
 
 }
 -(UITableViewCellEditingStyle) tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -312,6 +356,8 @@
         Contains * temp = [self.fetchedResultsController objectAtIndexPath:indexPath]; 
         [self.listToDisplay.managedObjectContext deleteObject:temp];
     }
+    [self setSubtotalLable];
+
 }
 #pragma mark - generated code
 - (void)didReceiveMemoryWarning
@@ -346,6 +392,7 @@
     [self displayUIToolBar];
     [self setupFetchedResultsController];
     [self.tableView reloadData];
+    [self setSubtotalLable];
     
 }
 
@@ -357,6 +404,7 @@
     [self setEditList:nil];
     [self setSpacer:nil];
     [self setOptions:nil];
+    [self setPriceLable:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

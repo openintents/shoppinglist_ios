@@ -13,6 +13,10 @@
 		11298BFF15B277B100314E2E /* Contains.m in Sources */ = {isa = PBXBuildFile; fileRef = 11298BFE15B277B100314E2E /* Contains.m */; };
 		11298C0215B3C0D400314E2E /* PriceStoreTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11298C0115B3C0D400314E2E /* PriceStoreTableViewController.m */; };
 		11330E121566FDDE006691BF /* OptionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11330E111566FDDE006691BF /* OptionsTableViewController.m */; };
+		11348B1115B9D7F500D96A92 /* SelectStoreFilterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11348B1015B9D7F400D96A92 /* SelectStoreFilterTableViewController.m */; };
+		11348B1615B9DA5200D96A92 /* StoreFilteredListContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11348B1515B9DA5200D96A92 /* StoreFilteredListContentTableViewController.m */; };
+		1139D5A715BA5D8B0087ABAD /* SelectTagFilterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1139D5A615BA5D8B0087ABAD /* SelectTagFilterTableViewController.m */; };
+		1139D5AA15BA5DC90087ABAD /* TagFilteredListContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1139D5A915BA5DC80087ABAD /* TagFilteredListContentTableViewController.m */; };
 		113C98261567925800AFD094 /* SelectFontSizeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113C98251567925800AFD094 /* SelectFontSizeTableViewController.m */; };
 		113C982A1567927100AFD094 /* SelectSortingRuleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113C98291567927100AFD094 /* SelectSortingRuleTableViewController.m */; };
 		113D6E6A1577CE3E00F816F1 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113D6E691577CE3E00F816F1 /* MessageUI.framework */; };
@@ -70,6 +74,14 @@
 		11298C0115B3C0D400314E2E /* PriceStoreTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceStoreTableViewController.m; sourceTree = "<group>"; };
 		11330E101566FDDE006691BF /* OptionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsTableViewController.h; sourceTree = "<group>"; };
 		11330E111566FDDE006691BF /* OptionsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsTableViewController.m; sourceTree = "<group>"; };
+		11348B0F15B9D7F400D96A92 /* SelectStoreFilterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectStoreFilterTableViewController.h; path = Filter/SelectStoreFilterTableViewController.h; sourceTree = "<group>"; };
+		11348B1015B9D7F400D96A92 /* SelectStoreFilterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectStoreFilterTableViewController.m; path = Filter/SelectStoreFilterTableViewController.m; sourceTree = "<group>"; };
+		11348B1415B9DA5100D96A92 /* StoreFilteredListContentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreFilteredListContentTableViewController.h; sourceTree = "<group>"; };
+		11348B1515B9DA5200D96A92 /* StoreFilteredListContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreFilteredListContentTableViewController.m; sourceTree = "<group>"; };
+		1139D5A515BA5D8B0087ABAD /* SelectTagFilterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectTagFilterTableViewController.h; sourceTree = "<group>"; };
+		1139D5A615BA5D8B0087ABAD /* SelectTagFilterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectTagFilterTableViewController.m; sourceTree = "<group>"; };
+		1139D5A815BA5DC80087ABAD /* TagFilteredListContentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagFilteredListContentTableViewController.h; sourceTree = "<group>"; };
+		1139D5A915BA5DC80087ABAD /* TagFilteredListContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagFilteredListContentTableViewController.m; sourceTree = "<group>"; };
 		113C98241567925800AFD094 /* SelectFontSizeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectFontSizeTableViewController.h; sourceTree = "<group>"; };
 		113C98251567925800AFD094 /* SelectFontSizeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectFontSizeTableViewController.m; sourceTree = "<group>"; };
 		113C98281567927100AFD094 /* SelectSortingRuleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectSortingRuleTableViewController.h; sourceTree = "<group>"; };
@@ -155,6 +167,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11348B1315B9D80700D96A92 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				1139D5A515BA5D8B0087ABAD /* SelectTagFilterTableViewController.h */,
+				1139D5A615BA5D8B0087ABAD /* SelectTagFilterTableViewController.m */,
+				1139D5A815BA5DC80087ABAD /* TagFilteredListContentTableViewController.h */,
+				1139D5A915BA5DC80087ABAD /* TagFilteredListContentTableViewController.m */,
+				11348B0F15B9D7F400D96A92 /* SelectStoreFilterTableViewController.h */,
+				11348B1015B9D7F400D96A92 /* SelectStoreFilterTableViewController.m */,
+				11348B1415B9DA5100D96A92 /* StoreFilteredListContentTableViewController.h */,
+				11348B1515B9DA5200D96A92 /* StoreFilteredListContentTableViewController.m */,
+			);
+			name = Filter;
+			sourceTree = "<group>";
+		};
 		113C982B156797B400AFD094 /* Options */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +243,7 @@
 				114F7EA6155ECB11002209AF /* ListContentTableViewController.m */,
 				116283B115934D2500C025F6 /* EditingItemDetailTableViewControllerViewController.h */,
 				116283B215934D2500C025F6 /* EditingItemDetailTableViewControllerViewController.m */,
+				11348B1315B9D80700D96A92 /* Filter */,
 				113C982B156797B400AFD094 /* Options */,
 				11C289DD155D2E4300BC089D /* DataModel */,
 				114B9C23155AF408003F785C /* Supporting Files */,
@@ -426,6 +454,10 @@
 				11298BFF15B277B100314E2E /* Contains.m in Sources */,
 				11298C0215B3C0D400314E2E /* PriceStoreTableViewController.m in Sources */,
 				116F059615B4EA81008C2C3A /* PriceTextField.m in Sources */,
+				11348B1115B9D7F500D96A92 /* SelectStoreFilterTableViewController.m in Sources */,
+				11348B1615B9DA5200D96A92 /* StoreFilteredListContentTableViewController.m in Sources */,
+				1139D5A715BA5D8B0087ABAD /* SelectTagFilterTableViewController.m in Sources */,
+				1139D5AA15BA5DC90087ABAD /* TagFilteredListContentTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
