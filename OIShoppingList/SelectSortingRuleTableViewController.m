@@ -5,7 +5,11 @@
 //  Created by Tian Hongyu on 19/5/12.
 //  Copyright (c) 2012 OpenIntents. All rights reserved.
 //
-
+/**************
+ This class allows user to reorder the sorting creteria.
+ 
+ By dragging and reordering the sorting creteria, the class "OptionsTableViewController" would update the sorting predicates through delegation.
+ ************/
 #import "SelectSortingRuleTableViewController.h"
 
 @interface SelectSortingRuleTableViewController ()<MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>

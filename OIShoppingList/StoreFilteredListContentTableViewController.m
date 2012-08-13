@@ -5,7 +5,12 @@
 //  Created by Tian Hongyu on 21/7/12.
 //  Copyright (c) 2012 OpenIntents. All rights reserved.
 //
-
+/*************
+ This view controller displays a list with a store filter applied.
+ Only the entries with the specified filter would be displied
+ 
+ Property "listToDisplay" and "storeFilter" should be set before presenting the controller.
+ *************/
 #import "StoreFilteredListContentTableViewController.h"
 #import "EditingItemDetailTableViewControllerViewController.h"
 #import "ShoppingListSettingManager.h"

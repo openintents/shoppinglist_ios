@@ -51,6 +51,11 @@
 		11C4AD4A155D0B4A00CE7C7C /* ShoppingListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C4AD48155D0B4A00CE7C7C /* ShoppingListTableViewController.m */; };
 		11CD1963155D489B0003012B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CD1962155D489B0003012B /* CoreData.framework */; };
 		11F1CCBE156675D0000FB0E1 /* ShoppingListSettingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F1CCBD156675D0000FB0E1 /* ShoppingListSettingManager.m */; };
+		BA13A18315D8D27900AAC76D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BA13A17F15D8D27900AAC76D /* Icon.png */; };
+		BA13A18515D8D27900AAC76D /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA13A18115D8D27900AAC76D /* Icon@2x.png */; };
+		BABC694315D8DE53000E54A9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = BABC694115D8DE53000E54A9 /* Default.png */; };
+		BABC694415D8DE53000E54A9 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BABC694215D8DE53000E54A9 /* Default@2x.png */; };
+		BABC694615D8DE60000E54A9 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = BABC694515D8DE60000E54A9 /* iTunesArtwork */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +144,11 @@
 		11CD1962155D489B0003012B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		11F1CCBC156675D0000FB0E1 /* ShoppingListSettingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingListSettingManager.h; sourceTree = "<group>"; };
 		11F1CCBD156675D0000FB0E1 /* ShoppingListSettingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingListSettingManager.m; sourceTree = "<group>"; };
+		BA13A17F15D8D27900AAC76D /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		BA13A18115D8D27900AAC76D /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		BABC694115D8DE53000E54A9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		BABC694215D8DE53000E54A9 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		BABC694515D8DE60000E54A9 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,9 +253,10 @@
 				114F7EA6155ECB11002209AF /* ListContentTableViewController.m */,
 				116283B115934D2500C025F6 /* EditingItemDetailTableViewControllerViewController.h */,
 				116283B215934D2500C025F6 /* EditingItemDetailTableViewControllerViewController.m */,
-				11348B1315B9D80700D96A92 /* Filter */,
-				113C982B156797B400AFD094 /* Options */,
 				11C289DD155D2E4300BC089D /* DataModel */,
+				113C982B156797B400AFD094 /* Options */,
+				11348B1315B9D80700D96A92 /* Filter */,
+				BA13A18715D8D36D00AAC76D /* Resource */,
 				114B9C23155AF408003F785C /* Supporting Files */,
 			);
 			path = OIShoppingList;
@@ -254,13 +265,10 @@
 		114B9C23155AF408003F785C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				1111CAC7156D1F16009F5CB7 /* checkMark.png */,
-				1111CAC8156D1F16009F5CB7 /* noCheckMark.png */,
 				114B9C31155AF408003F785C /* MainStoryboard_iPad.storyboard */,
 				114B9C2B155AF408003F785C /* ShoppingListAppDelegate.h */,
 				114B9C2C155AF408003F785C /* ShoppingListAppDelegate.m */,
 				114B9C24155AF408003F785C /* OIShoppingList-Info.plist */,
-				114B9C25155AF408003F785C /* InfoPlist.strings */,
 				114B9C28155AF408003F785C /* main.m */,
 				114B9C2A155AF408003F785C /* OIShoppingList-Prefix.pch */,
 			);
@@ -318,6 +326,21 @@
 				11C289E2155D3EC200BC089D /* CoreDataTableViewController.m */,
 			);
 			name = DataModel;
+			sourceTree = "<group>";
+		};
+		BA13A18715D8D36D00AAC76D /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				BABC694515D8DE60000E54A9 /* iTunesArtwork */,
+				BABC694115D8DE53000E54A9 /* Default.png */,
+				BABC694215D8DE53000E54A9 /* Default@2x.png */,
+				BA13A17F15D8D27900AAC76D /* Icon.png */,
+				BA13A18115D8D27900AAC76D /* Icon@2x.png */,
+				1111CAC7156D1F16009F5CB7 /* checkMark.png */,
+				1111CAC8156D1F16009F5CB7 /* noCheckMark.png */,
+				114B9C25155AF408003F785C /* InfoPlist.strings */,
+			);
+			name = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -395,6 +418,11 @@
 				114B9C33155AF408003F785C /* MainStoryboard_iPad.storyboard in Resources */,
 				1111CAC9156D1F16009F5CB7 /* checkMark.png in Resources */,
 				1111CACA156D1F16009F5CB7 /* noCheckMark.png in Resources */,
+				BA13A18315D8D27900AAC76D /* Icon.png in Resources */,
+				BA13A18515D8D27900AAC76D /* Icon@2x.png in Resources */,
+				BABC694315D8DE53000E54A9 /* Default.png in Resources */,
+				BABC694415D8DE53000E54A9 /* Default@2x.png in Resources */,
+				BABC694615D8DE60000E54A9 /* iTunesArtwork in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,7 +549,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "com.apple.ubiquity.peer-uuid.D02162BE-502D-4CED-9354-32075D47961B";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -536,7 +565,9 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -547,7 +578,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hongyu Tian (MKR3ELM4U3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hongyu Tian (MKR3ELM4U3)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -556,7 +588,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "F1B9B039-AD77-43AA-8FBA-80F1746A5642";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F1B9B039-AD77-43AA-8FBA-80F1746A5642";
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -565,10 +600,14 @@
 		114B9C4F155AF409003F785C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OIShoppingList/OIShoppingList-Prefix.pch";
 				INFOPLIST_FILE = "OIShoppingList/OIShoppingList-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -576,10 +615,16 @@
 		114B9C50155AF409003F785C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hongyu Tian (MKR3ELM4U3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hongyu Tian (MKR3ELM4U3)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OIShoppingList/OIShoppingList-Prefix.pch";
 				INFOPLIST_FILE = "OIShoppingList/OIShoppingList-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "F1B9B039-AD77-43AA-8FBA-80F1746A5642";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F1B9B039-AD77-43AA-8FBA-80F1746A5642";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -588,6 +633,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/OIShoppingList.app/OIShoppingList";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
@@ -605,6 +652,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/OIShoppingList.app/OIShoppingList";
+				CODE_SIGN_IDENTITY = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
@@ -628,7 +676,7 @@
 				114B9C4D155AF409003F785C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		114B9C4E155AF409003F785C /* Build configuration list for PBXNativeTarget "OIShoppingList" */ = {
 			isa = XCConfigurationList;
@@ -637,7 +685,7 @@
 				114B9C50155AF409003F785C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		114B9C51155AF409003F785C /* Build configuration list for PBXNativeTarget "OIShoppingListTests" */ = {
 			isa = XCConfigurationList;
@@ -646,7 +694,7 @@
 				114B9C53155AF409003F785C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 

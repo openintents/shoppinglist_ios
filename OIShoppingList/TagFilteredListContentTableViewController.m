@@ -5,6 +5,12 @@
 //  Created by Tian Hongyu on 21/7/12.
 //  Copyright (c) 2012 OpenIntents. All rights reserved.
 //
+/*************
+ This view controller displays a list with a tag filter applied.
+ Only the entries with the specified filter would be displied
+ 
+ Property "listToDisplay" and "tagFilter" should be set before presenting the controller.
+ *************/
 
 #import "TagFilteredListContentTableViewController.h"
 #import "EditingItemDetailTableViewControllerViewController.h"
@@ -88,7 +94,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSArray* font=self.mySettingManager.getFontSize;
-    static NSString *CellIdentifier = @"List Entry Cell";
+    static NSString *CellIdentifier = @"TagFilteredTableCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];

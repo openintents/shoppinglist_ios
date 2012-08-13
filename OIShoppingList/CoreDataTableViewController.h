@@ -1,3 +1,9 @@
+/**************
+ This class is adapted from Stanford CS193p website.
+ ************/
+
+
+
 //
 //  CoreDataTableViewController.h
 //

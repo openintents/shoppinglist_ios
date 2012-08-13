@@ -5,7 +5,10 @@
 //  Created by Tian Hongyu on 18/5/12.
 //  Copyright (c) 2012 OpenIntents. All rights reserved.
 //
-
+/*************
+ this class presents a static table view for adjusting settings.
+ Delegation protocal for changing font size and sorting order is also implemented.
+ *************/
 #import "OptionsTableViewController.h"
 
 @interface OptionsTableViewController ()<MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate,UIActionSheetDelegate>
@@ -119,7 +122,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
-        case 0:
+        /*case 0:
         {
             switch (indexPath.row) {
                 case 0:
@@ -133,9 +136,9 @@
                     break;
             }
              break;
-        }
+        }*/
            
-        case 1:
+        case 0:
         {
             switch (indexPath.row) {
                 case 0:
@@ -157,7 +160,7 @@
             break;
         }
             
-        case 2:
+        case 1:
         {
             switch (indexPath.row) {
                 case 0:

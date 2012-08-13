@@ -5,6 +5,19 @@
 //  Created by Tian Hongyu on 12/5/12.
 //  Copyright (c) 2012 OpenIntents. All rights reserved.
 //
+/***********
+ this class displays a list that is selected by "ShoppingListTableViewController", which is stored in property"listToDisplay".
+ 
+ This class, on its own, handle:
+ edit list/view list button click;
+ clean up button click.
+ 
+ This controller segues to:
+ "SelectTagFilterTableViewController" or "SelectStoreFilterTableViewController" when filter button is clicked;
+ "OptionsTableViewControler" when options button is clicked.
+ 
+ In order for the controller to work properly, its "listToDisplay" property should be set before the controller is presented to user.
+ **********/
 
 #import "ListContentTableViewController.h"
 #import "EditingItemDetailTableViewControllerViewController.h"
@@ -15,10 +28,11 @@
 @interface ListContentTableViewController()<MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *addNewItemTextField;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cleanUp;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *details;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *share;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *editList;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *spacer;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *options;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *filter;
 @property (strong,nonatomic) ShoppingListSettingManager * mySettingManager;
 
 @property  int manageModeActive;
@@ -30,32 +44,22 @@
 
 
 @implementation ListContentTableViewController
+
+#pragma mark - suntheize, getter and setters
+
 @synthesize addNewItemTextField = _addNewItemTextField;
 @synthesize cleanUp = _cleanUp;
-@synthesize details = _Details;
+@synthesize share = _share;
 @synthesize editList = _editList;
 @synthesize spacer = _spacer;
 @synthesize options = _options;
+@synthesize filter = _filter;
 @synthesize listToDisplay = _listToDisplay;
 @synthesize listEntry =_listEntry;
 @synthesize manageModeActive = _manageModeActive;
 @synthesize mySettingManager = _mySettingManager;
 @synthesize shareOption = _shareOption;
 @synthesize priceLable = _priceLable;
-
--(void)setSubtotalLable
-{
-    NSString* resultString = @"Subtotals:               ";
-    NSSet* set=[self.listToDisplay getStoreWisePriceDescription];
-    for (NSDictionary* storeDic in set) {
-        // @"subtotal",@"availablePrice",@"name"
-        NSString* storeName = (NSString*)[storeDic objectForKey:@"name"];
-        double storeSubtotal = [((NSNumber*)[storeDic objectForKey:@"subtotal"])doubleValue];
-        NSString*temp = [NSString stringWithFormat:@"%@: $ %5.2lf\n",storeName,storeSubtotal];
-        resultString = [resultString stringByAppendingString:temp];
-    }
-    self.priceLable.text = resultString;
-}
 -(ShoppingListSettingManager*) mySettingManager
 {
     if (!_mySettingManager) {
@@ -63,6 +67,28 @@
     }
     return _mySettingManager;
 }
+#pragma mark - Subtotal display
+-(void)setSubtotalLable
+{
+    NSString* resultString = @"Subtotals:               ";
+    NSSet* set=[self.listToDisplay getStoreWisePriceDescription];
+    if (set.count >0) {
+        for (NSDictionary* storeDic in set) {
+            // @"subtotal",@"availablePrice",@"name"
+            NSString* storeName = (NSString*)[storeDic objectForKey:@"name"];
+            double storeSubtotal = [((NSNumber*)[storeDic objectForKey:@"subtotal"])doubleValue];
+            NSString*temp = [NSString stringWithFormat:@"%@: $ %5.2lf\n",storeName,storeSubtotal];
+            resultString = [resultString stringByAppendingString:temp];
+        }
+
+    }
+    else {
+        resultString = @"No price information available.\n";
+    }
+    self.priceLable.text = resultString;
+}
+
+
 #pragma mark - SMS sharing
 -(NSString*)getSharedListInText
 {
@@ -95,9 +121,7 @@
         
     }
 }
-- (void)messageComposeController:(MFMessageComposeViewController *)controller
-             didFinishWithResult:(MessageComposeResult)result
-                           error:(NSError *)error
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
 {
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -109,20 +133,12 @@
         MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
         picker.mailComposeDelegate = self;
         
-        [picker setSubject: self.navigationController.title];
-            
-        
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"ipodnano"
-                                                         ofType:@"png"];
-        NSData *myData = [NSData dataWithContentsOfFile:path];
-        [picker addAttachmentData:myData mimeType:@"image/png"
-                         fileName:@"ipodnano"];
-        
+        [picker setSubject: self.listToDisplay.name];
         NSString *emailBody = [self getSharedListInText];
         [picker setMessageBody:emailBody isHTML:NO];
         
         [self presentModalViewController:picker animated:YES];
-        
+
     }        
 }
 
@@ -246,7 +262,7 @@
 
 
 
-#pragma mark - UI Related Configuration
+#pragma mark - UI button and toolbar
 
 - (IBAction)cleanUp:(UITabBarItem *)sender 
 {
@@ -290,8 +306,9 @@
 {    
     self.navigationController.toolbarHidden = NO; 
     NSMutableArray* toolbarItems = [[NSMutableArray alloc]init];
-    [toolbarItems addObject:self.details];
+    [toolbarItems addObject:self.share];
     [toolbarItems addObject: self.editList];
+    [toolbarItems addObject:self.filter];
     [toolbarItems addObject:self.spacer];
     [toolbarItems addObject:self.options];
     [self.navigationController.toolbar setItems:[NSArray arrayWithArray:toolbarItems]  animated:YES];
@@ -299,6 +316,8 @@
 
 //set the listEntry property of the EditDetail view, so that it can access the database
 
+
+#pragma mark - UITableViewDeligate
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
@@ -310,7 +329,6 @@
         NSLog(@"setDestinationListToDisplay");
     }
 }
-#pragma mark - UITableViewDeligate
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
     EditingItemDetailTableViewControllerViewController * entryDetail =[self.storyboard instantiateViewControllerWithIdentifier:@"entryDetail"];
     entryDetail.entry = [self.fetchedResultsController objectAtIndexPath:indexPath]; 
@@ -400,11 +418,12 @@
 {
     [self setAddNewItemTextField:nil];
     [self setCleanUp:nil];
-    [self setDetails:nil];
+    [self setShare:nil];
     [self setEditList:nil];
     [self setSpacer:nil];
     [self setOptions:nil];
     [self setPriceLable:nil];
+    [self setFilter:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -413,7 +432,8 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 @end

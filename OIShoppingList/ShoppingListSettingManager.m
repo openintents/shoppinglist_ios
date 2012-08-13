@@ -5,7 +5,12 @@
 //  Created by Tian Hongyu on 18/5/12.
 //  Copyright (c) 2012 OpenIntents. All rights reserved.
 //
-
+/**************
+ Instances of this class manages and updates the setting stored in NSUserDefaults.
+ 
+ Synchronization has been added to the setters of properties. And the getter reads from NSUserDefault for its value.
+ Therefore, any changes in one instance of this class would also be reflected in other instances.
+ **************/
 #import "ShoppingListSettingManager.h"
 #define FONT_SIZE @"OIShoppingList.userSetting.FontSize"
 #define SORTING_ORDER  @"OIShoppingList.userSetting.SortingOrder"

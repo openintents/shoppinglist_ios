@@ -5,7 +5,9 @@
 //  Created by Tian Hongyu on 13/7/12.
 //  Copyright (c) 2012 OpenIntents. All rights reserved.
 //
-
+/**************
+ This category adds methods to the generated class"Itemsstores", so that these methods won't be "erased" when regenarating the class
+ *************/
 #import "Itemsstores+Manage.h"
 @implementation Itemsstores (Manage)
 

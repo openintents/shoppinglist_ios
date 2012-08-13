@@ -5,7 +5,13 @@
 //  Created by Tian Hongyu on 21/6/12.
 //  Copyright (c) 2012 OpenIntents. All rights reserved.
 //
-
+/***********
+ This view controller displays the fields that are associated with a certain item and enables user to edit the various fields.
+ 
+ In order to display and manage the store-wise price calculation, the application would sague to "PriceStoreTableViewController" when price is selected.
+ 
+ For this controller to work, the "entry" property must be set correctly whent the controller is loaded from storyboard.
+ **********/
 #import "EditingItemDetailTableViewControllerViewController.h"
 
 @interface EditingItemDetailTableViewControllerViewController ()
@@ -41,9 +47,7 @@
 @synthesize debug = _debug;
 
 
-#pragma mark - Table view delegate
-
-
+#pragma mark - Text field and keyboard handling
 - (IBAction)finishTypingProduct:(id)sender {
     [sender resignFirstResponder];
     self.title = self.product.text;
@@ -67,7 +71,7 @@
 - (IBAction)finishTypingUnit:(id)sender {
     [self saveEditingIntoCoreData];
     [self.myPickerViewUnits reloadAllComponents];
-    int myIndex;
+    int myIndex=0;
     NSArray* data = self.myPickerDataUnits;
     for (Units* temp in data) {
         if ([temp.name isEqualToString:((UITextView*)sender).text]) {
@@ -79,6 +83,9 @@
     [self.myPickerViewUnits selectRow: myIndex inComponent:0 animated:YES];
     [sender resignFirstResponder];
 }
+
+#pragma mark - Picker and stepper delegate
+
 - (IBAction)stepperVelueChanged:(UIStepper *)sender {
     double value = [sender value];
     
@@ -127,6 +134,7 @@
 }
 
 
+#pragma mark - loading and saving to/ from core data
 
 -(void) saveEditingIntoCoreData
 {
@@ -145,6 +153,15 @@
     self.myStepper.value = [self.entry.quantity doubleValue];
     
 }
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    if ([segue.destinationViewController respondsToSelector:@selector(setContain:)]) {
+        [segue.destinationViewController performSelector:@selector(setContain:) withObject:self.entry];
+    }
+}
+#pragma mark - lifecycle code
+
 -(void)viewWillDisappear:(BOOL)animated{
     [self saveEditingIntoCoreData];
     
@@ -156,7 +173,7 @@
     self.debug= true;
     [super viewWillAppear:animated];
     [self loadTextFromCoreDataToTextFields];
-    int myIndex;
+    int myIndex=0;
     NSArray* data = self.myPickerDataUnits;
     for (Units* temp in data) {
         if ([temp.name isEqualToString:self.unit.text]) {
@@ -169,13 +186,7 @@
 
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    
-    if ([segue.destinationViewController respondsToSelector:@selector(setContain:)]) {
-        [segue.destinationViewController performSelector:@selector(setContain:) withObject:self.entry];
-    }
-}
+
 
 #pragma mark - Generated Livecycle Code
 

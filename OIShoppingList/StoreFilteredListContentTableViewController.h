@@ -11,6 +11,12 @@
 #import "Lists+Manage.h"
 #import "Items+Manage.h"
 #import "Contains+Manage.h"
+/*************
+ This view controller displays a list with a store filter applied.
+ Only the entries with the specified store filter would be displied
+ 
+ Property "listToDisplay" and "storeFilter" should be set before presenting the controller.
+ *************/
 
 
 @interface StoreFilteredListContentTableViewController : CoreDataTableViewController<UITableViewDelegate, UIActionSheetDelegate>

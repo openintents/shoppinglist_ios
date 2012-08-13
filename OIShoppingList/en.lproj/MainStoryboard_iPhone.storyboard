@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="hjj-zT-UuN">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
@@ -42,6 +41,28 @@
                                 <action selector="finishTyping:" destination="LQu-yQ-ot6" eventType="editingDidEndOnExit" id="GHl-sC-CAg"/>
                             </connections>
                         </textField>
+                        <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" style="gray" id="5Br-Ly-bWx" showNotesWithSelection="YES">
+                            <rect key="frame" x="0.0" y="97" width="320" height="20"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <mutableAttributedString key="userComments">
+                                <!--Loading lists...-->
+                                <mutableData key="keyedArchiveRepresentation">
+YnBsaXN0MDDUAQIDBAUGREVYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCA8T
+GiQlJiwwODk8P1UkbnVsbNMJCgsMDQ5cTlNBdHRyaWJ1dGVzViRjbGFzc1hOU1N0cmluZ4AEgA2AAtIK
+EBESWU5TLnN0cmluZ4ADXxAQTG9hZGluZyBsaXN0cy4uLtIUFRYXWiRjbGFzc25hbWVYJGNsYXNzZXNf
+EA9OU011dGFibGVTdHJpbmejFhgZWE5TU3RyaW5nWE5TT2JqZWN00wobHB0eIVdOUy5rZXlzWk5TLm9i
+amVjdHOADKIfIIAFgAaiIiOAB4AJXxAQTlNQYXJhZ3JhcGhTdHlsZVZOU0ZvbnTTJwooKSorWk5TVGFi
+U3RvcHNbTlNBbGlnbm1lbnSAAIAIEATSFBUtLl8QEE5TUGFyYWdyYXBoU3R5bGWiLxlfEBBOU1BhcmFn
+cmFwaFN0eWxl1AoxMjM0NTY3Vk5TTmFtZVZOU1NpemVYTlNmRmxhZ3OAC4AKI0AoAAAAAAAAEBBZSGVs
+dmV0aWNh0hQVOjtWTlNGb250ojoZ0hQVPT5cTlNEaWN0aW9uYXJ5oj0Z0hQVQEFfEBlOU011dGFibGVB
+dHRyaWJ1dGVkU3RyaW5no0JDGV8QGU5TTXV0YWJsZUF0dHJpYnV0ZWRTdHJpbmdfEBJOU0F0dHJpYnV0
+ZWRTdHJpbmdfEA9OU0tleWVkQXJjaGl2ZXLRRkdUcm9vdIABAAgAEQAaACMALQAyADcARgBMAFMAYABn
+AHAAcgB0AHYAewCFAIcAmgCfAKoAswDFAMkA0gDbAOIA6gD1APcA+gD8AP4BAQEDAQUBGAEfASYBMQE9
+AT8BQQFDAUgBWwFeAXEBegGBAYgBkQGTAZUBngGgAaoBrwG2AbkBvgHLAc4B0wHvAfMCDwIkAjYCOQI+
+AAAAAAAAAgEAAAAAAAAASAAAAAAAAAAAAAAAAAAAAkA
+</mutableData>
+                            </mutableAttributedString>
+                        </activityIndicatorView>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ShoppingListTable" textLabel="VBB-nf-9Ba" detailTextLabel="jC2-YK-L2j" style="IBUITableViewCellStyleSubtitle" id="9b5-1L-23J">
                                 <rect key="frame" x="0.0" y="53" width="320" height="44"/>
@@ -81,6 +102,7 @@
                     <navigationItem key="navigationItem" title="My Lists" id="Y1F-8e-TUk"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="myActivityIndicator" destination="5Br-Ly-bWx" id="1tD-3G-04C"/>
                         <outlet property="myTextField" destination="SK2-sL-gMr" id="aqj-b2-xHZ"/>
                     </connections>
                 </tableViewController>
@@ -169,7 +191,7 @@
                                                         <action selector="finishTypingPrioriety:" destination="eI8-Vt-IFx" eventType="editingDidEndOnExit" id="HHc-fl-cNB"/>
                                                     </connections>
                                                 </textField>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Prioriety" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="gRz-qq-MZA">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Priority" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="gRz-qq-MZA">
                                                     <rect key="frame" x="20" y="11" width="69" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -422,10 +444,11 @@
                     <connections>
                         <outlet property="addNewItemTextField" destination="wbT-Ek-WYr" id="cd4-NR-8ZI"/>
                         <outlet property="cleanUp" destination="uOr-My-gWb" id="OtC-Ia-BtS"/>
-                        <outlet property="details" destination="ovm-ai-NGL" id="SvB-WS-cSK"/>
                         <outlet property="editList" destination="m9p-Cj-eso" id="iFm-qF-Amv"/>
+                        <outlet property="filter" destination="vIj-C6-yUa" id="UE2-PT-ibJ"/>
                         <outlet property="options" destination="oSO-PI-nZC" id="gHX-Tf-rTb"/>
                         <outlet property="priceLable" destination="FMM-qU-hkT" id="Ztj-yD-MMK"/>
+                        <outlet property="share" destination="ovm-ai-NGL" id="6nz-yO-lrW"/>
                         <outlet property="spacer" destination="Sgg-hI-yML" id="chk-Y3-2a4"/>
                         <segue destination="eI8-Vt-IFx" kind="push" identifier="Edit List Contain Detail" id="KLH-mB-CDo"/>
                         <segue destination="vpR-FZ-LzB" kind="push" identifier="Select Tag Filter" id="cVy-W9-HLr"/>
@@ -529,51 +552,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection headerTitle="Shearing" id="Yz7-Ft-zS8">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Ttc-x1-6TT" style="IBUITableViewCellStyleDefault" id="7Kj-N5-XlI">
-                                        <rect key="frame" x="0.0" y="46" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Share via SMS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ttc-x1-6TT">
-                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" textLabel="SpD-MS-ZMU" style="IBUITableViewCellStyleDefault" id="WaU-Lc-ZyJ">
-                                        <rect key="frame" x="0.0" y="91" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Share via Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SpD-MS-ZMU">
-                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                             <tableViewSection headerTitle="Display Settings" id="Ebu-zw-aXt">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="1CU-X9-WqX" detailTextLabel="twJ-bk-3Tr" style="IBUITableViewCellStyleValue1" id="Jbv-0A-gxw">
-                                        <rect key="frame" x="0.0" y="182" width="320" height="45"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FuntSizeOptionTableCell" textLabel="1CU-X9-WqX" detailTextLabel="twJ-bk-3Tr" style="IBUITableViewCellStyleValue1" id="Jbv-0A-gxw">
+                                        <rect key="frame" x="0.0" y="46" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
@@ -601,8 +583,8 @@
                                             <segue destination="kMI-pY-5YK" kind="push" id="hQl-v7-Sap"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" textLabel="lI2-DA-aH0" detailTextLabel="5Dr-yD-5mo" style="IBUITableViewCellStyleValue1" id="psw-Hr-ou4">
-                                        <rect key="frame" x="0.0" y="227" width="320" height="44"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SortByRuleTableCell" textLabel="lI2-DA-aH0" detailTextLabel="5Dr-yD-5mo" style="IBUITableViewCellStyleValue1" id="psw-Hr-ou4">
+                                        <rect key="frame" x="0.0" y="91" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -629,8 +611,8 @@
                                             <segue destination="kma-zX-5AM" kind="push" id="55I-qr-SZp"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="TP8-wy-114">
-                                        <rect key="frame" x="0.0" y="271" width="320" height="45"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Auto-HideCell" id="TP8-wy-114">
+                                        <rect key="frame" x="0.0" y="135" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -660,8 +642,8 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Others" id="BP8-lF-UrJ">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="gEm-vu-qAy" style="IBUITableViewCellStyleDefault" id="89D-f8-Qmc">
-                                        <rect key="frame" x="0.0" y="362" width="320" height="46"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ResetSettingCell" textLabel="gEm-vu-qAy" style="IBUITableViewCellStyleDefault" id="89D-f8-Qmc">
+                                        <rect key="frame" x="0.0" y="226" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
@@ -733,7 +715,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="cYZ-0b-SY2">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SortRuleTableCell" id="cYZ-0b-SY2">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -803,7 +785,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="jp7-lx-vIo">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TagFilteredTableCell" id="jp7-lx-vIo">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -849,10 +831,11 @@
             <relationships>
                 <relationship kind="outlet" name="addNewItemTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="cleanUp" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="details" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="editList" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="filter" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="options" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="priceLable" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="share" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="spacer" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
@@ -882,7 +865,7 @@
         <class className="ShoppingListTableViewController" superclassName="CoreDataTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ShoppingListTableViewController.h"/>
             <relationships>
-                <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="myActivityIndicator" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="myTextField" candidateClass="UITextField"/>
             </relationships>
         </class>

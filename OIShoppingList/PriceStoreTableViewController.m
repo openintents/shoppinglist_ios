@@ -5,7 +5,13 @@
 //  Created by Tian Hongyu on 16/7/12.
 //  Copyright (c) 2012 OpenIntents. All rights reserved.
 //
-
+/**************
+ This class displays the name of all the stores that are associated with a list and the price information, if available, that are associated with a certain item.
+ 
+ When clilcking on the text fielt that are located within each cell, user would be able to key in the price for an item in a store.
+ 
+ In order for the controller to work, property "contain" should be set.
+ *************/
 #import "PriceStoreTableViewController.h"
 
 @interface PriceStoreTableViewController ()
